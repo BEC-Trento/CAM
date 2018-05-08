@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>imagingpars</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >siscam</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Module&nbsp;imagingpars
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="imagingpars-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="imagingpars-module.html">Module imagingpars</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#-*- coding: latin-1 -*-</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-docstring">"""Contains imaging parameters like effective pixelsize, absorption</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-docstring">coefficient, ..."""</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"> </tt>
+<a name="ImagingPars"></a><div id="ImagingPars-def"><a name="L6"></a><tt class="py-lineno"> 6</tt> <a class="py-toggle" href="#" id="ImagingPars-toggle" onclick="return toggle('ImagingPars');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="imagingpars.ImagingPars-class.html">ImagingPars</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ImagingPars-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="ImagingPars-expanded"><a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line">    <tt class="py-docstring">"""Base class for parameters of imaging system.</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-docstring">    @cvar description: descriptive name of settings, used for GUI selection.</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-docstring">    @cvar pixelsize: Size of area (in &#181;m) which is imaged to one pixel of the cam.</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-docstring">    @cvar sigma0: cross section for light absorption</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">    <tt id="link-0" class="py-name" targets="Variable fitting.FitParsBimodal2d.description=fitting.FitParsBimodal2d-class.html#description,Variable fitting.FitParsBoseBimodal2d.description=fitting.FitParsBoseBimodal2d-class.html#description,Variable fitting.FitParsGauss2d.description=fitting.FitParsGauss2d-class.html#description,Variable fitting.FitParsNoFit.description=fitting.FitParsNoFit-class.html#description,Variable fitting.FitParsTF2d.description=fitting.FitParsTF2d-class.html#description,Variable imagingpars.ImagingPars.description=imagingpars.ImagingPars-class.html#description,Variable imagingpars.ImagingParsBlueFox.description=imagingpars.ImagingParsBlueFox-class.html#description,Variable imagingpars.ImagingParsHorizontal.description=imagingpars.ImagingParsHorizontal-class.html#description,Variable imagingpars.ImagingParsVertical.description=imagingpars.ImagingParsVertical-class.html#description"><a title="fitting.FitParsBimodal2d.description
+fitting.FitParsBoseBimodal2d.description
+fitting.FitParsGauss2d.description
+fitting.FitParsNoFit.description
+fitting.FitParsTF2d.description
+imagingpars.ImagingPars.description
+imagingpars.ImagingParsBlueFox.description
+imagingpars.ImagingParsHorizontal.description
+imagingpars.ImagingParsVertical.description" class="py-name" href="#" onclick="return doclink('link-0', 'description', 'link-0');">description</a></tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">    <tt id="link-1" class="py-name" targets="Variable imagingpars.ImagingPars.pixelsize=imagingpars.ImagingPars-class.html#pixelsize,Variable imagingpars.ImagingParsBlueFox.pixelsize=imagingpars.ImagingParsBlueFox-class.html#pixelsize,Variable imagingpars.ImagingParsHorizontal.pixelsize=imagingpars.ImagingParsHorizontal-class.html#pixelsize,Variable imagingpars.ImagingParsVertical.pixelsize=imagingpars.ImagingParsVertical-class.html#pixelsize"><a title="imagingpars.ImagingPars.pixelsize
+imagingpars.ImagingParsBlueFox.pixelsize
+imagingpars.ImagingParsHorizontal.pixelsize
+imagingpars.ImagingParsVertical.pixelsize" class="py-name" href="#" onclick="return doclink('link-1', 'pixelsize', 'link-1');">pixelsize</a></tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">    <tt id="link-2" class="py-name" targets="Variable imagingpars.ImagingPars.sigma0=imagingpars.ImagingPars-class.html#sigma0"><a title="imagingpars.ImagingPars.sigma0" class="py-name" href="#" onclick="return doclink('link-2', 'sigma0', 'link-2');">sigma0</a></tt> <tt class="py-op">=</tt> <tt class="py-number">1.5</tt><tt class="py-op">/</tt><tt class="py-number">3.14</tt><tt class="py-op">*</tt><tt class="py-op">(</tt><tt class="py-number">780e-9</tt><tt class="py-op">)</tt><tt class="py-op">**</tt><tt class="py-number">2</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">    <tt id="link-3" class="py-name" targets="Variable imagingpars.ImagingPars.expansion_time=imagingpars.ImagingPars-class.html#expansion_time"><a title="imagingpars.ImagingPars.expansion_time" class="py-name" href="#" onclick="return doclink('link-3', 'expansion_time', 'link-3');">expansion_time</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">    <tt id="link-4" class="py-name" targets="Variable imagingpars.ImagingPars.mass=imagingpars.ImagingPars-class.html#mass"><a title="imagingpars.ImagingPars.mass" class="py-name" href="#" onclick="return doclink('link-4', 'mass', 'link-4');">mass</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">    <tt id="link-5" class="py-name" targets="Variable imagingpars.ImagingPars.ODmax=imagingpars.ImagingPars-class.html#ODmax"><a title="imagingpars.ImagingPars.ODmax" class="py-name" href="#" onclick="return doclink('link-5', 'ODmax', 'link-5');">ODmax</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> <tt class="py-comment">#maximum optical density</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"> </tt>
+<a name="ImagingPars.__str__"></a><div id="ImagingPars.__str__-def"><a name="L20"></a><tt class="py-lineno">20</tt> <a class="py-toggle" href="#" id="ImagingPars.__str__-toggle" onclick="return toggle('ImagingPars.__str__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="imagingpars.ImagingPars-class.html#__str__">__str__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ImagingPars.__str__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="ImagingPars.__str__-expanded"><a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt class="py-name">s</tt> <tt class="py-op">=</tt> <tt class="py-string">"%s, t_exp = %.1fms, OD_max = %.1f"</tt><tt class="py-op">%</tt><tt class="py-op">(</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="fitting.FitParsBimodal2d.description
+fitting.FitParsBoseBimodal2d.description
+fitting.FitParsGauss2d.description
+fitting.FitParsNoFit.description
+fitting.FitParsTF2d.description
+imagingpars.ImagingPars.description
+imagingpars.ImagingParsBlueFox.description
+imagingpars.ImagingParsHorizontal.description
+imagingpars.ImagingParsVertical.description" class="py-name" href="#" onclick="return doclink('link-6', 'description', 'link-0');">description</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name"><a title="imagingpars.ImagingPars.expansion_time" class="py-name" href="#" onclick="return doclink('link-7', 'expansion_time', 'link-3');">expansion_time</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name"><a title="imagingpars.ImagingPars.ODmax" class="py-name" href="#" onclick="return doclink('link-8', 'ODmax', 'link-5');">ODmax</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">s</tt> </tt>
+</div></div><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"> </tt>
+<a name="ImagingParsHorizontal"></a><div id="ImagingParsHorizontal-def"><a name="L27"></a><tt class="py-lineno">27</tt> <a class="py-toggle" href="#" id="ImagingParsHorizontal-toggle" onclick="return toggle('ImagingParsHorizontal');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="imagingpars.ImagingParsHorizontal-class.html">ImagingParsHorizontal</a><tt class="py-op">(</tt><tt class="py-base-class">ImagingPars</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ImagingParsHorizontal-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="ImagingParsHorizontal-expanded"><a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">    <tt id="link-9" class="py-name"><a title="fitting.FitParsBimodal2d.description
+fitting.FitParsBoseBimodal2d.description
+fitting.FitParsGauss2d.description
+fitting.FitParsNoFit.description
+fitting.FitParsTF2d.description
+imagingpars.ImagingPars.description
+imagingpars.ImagingParsBlueFox.description
+imagingpars.ImagingParsHorizontal.description
+imagingpars.ImagingParsVertical.description" class="py-name" href="#" onclick="return doclink('link-9', 'description', 'link-0');">description</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"horizontal"</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">    <tt id="link-10" class="py-name"><a title="imagingpars.ImagingPars.pixelsize
+imagingpars.ImagingParsBlueFox.pixelsize
+imagingpars.ImagingParsHorizontal.pixelsize
+imagingpars.ImagingParsVertical.pixelsize" class="py-name" href="#" onclick="return doclink('link-10', 'pixelsize', 'link-1');">pixelsize</a></tt> <tt class="py-op">=</tt> <tt class="py-number">6.45e-6</tt><tt class="py-op">/</tt><tt class="py-number">2</tt> <tt class="py-op">*</tt> <tt class="py-number">1e6</tt> <tt class="py-comment">#pixelsize in &#181;m</tt> </tt>
+</div><a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">     </tt>
+<a name="ImagingParsVertical"></a><div id="ImagingParsVertical-def"><a name="L31"></a><tt class="py-lineno">31</tt> <a class="py-toggle" href="#" id="ImagingParsVertical-toggle" onclick="return toggle('ImagingParsVertical');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="imagingpars.ImagingParsVertical-class.html">ImagingParsVertical</a><tt class="py-op">(</tt><tt class="py-base-class">ImagingPars</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ImagingParsVertical-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="ImagingParsVertical-expanded"><a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">    <tt id="link-11" class="py-name"><a title="fitting.FitParsBimodal2d.description
+fitting.FitParsBoseBimodal2d.description
+fitting.FitParsGauss2d.description
+fitting.FitParsNoFit.description
+fitting.FitParsTF2d.description
+imagingpars.ImagingPars.description
+imagingpars.ImagingParsBlueFox.description
+imagingpars.ImagingParsHorizontal.description
+imagingpars.ImagingParsVertical.description" class="py-name" href="#" onclick="return doclink('link-11', 'description', 'link-0');">description</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"vertical"</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">    <tt id="link-12" class="py-name"><a title="imagingpars.ImagingPars.pixelsize
+imagingpars.ImagingParsBlueFox.pixelsize
+imagingpars.ImagingParsHorizontal.pixelsize
+imagingpars.ImagingParsVertical.pixelsize" class="py-name" href="#" onclick="return doclink('link-12', 'pixelsize', 'link-1');">pixelsize</a></tt> <tt class="py-op">=</tt> <tt class="py-number">6.45e-6</tt><tt class="py-op">/</tt><tt class="py-number">2.5</tt> <tt class="py-op">*</tt> <tt class="py-number">1e6</tt> <tt class="py-comment">#pixelsize in &#181;m</tt> </tt>
+</div><a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"> </tt>
+<a name="ImagingParsBlueFox"></a><div id="ImagingParsBlueFox-def"><a name="L35"></a><tt class="py-lineno">35</tt> <a class="py-toggle" href="#" id="ImagingParsBlueFox-toggle" onclick="return toggle('ImagingParsBlueFox');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="imagingpars.ImagingParsBlueFox-class.html">ImagingParsBlueFox</a><tt class="py-op">(</tt><tt class="py-base-class">ImagingPars</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ImagingParsBlueFox-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="ImagingParsBlueFox-expanded"><a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">    <tt id="link-13" class="py-name"><a title="fitting.FitParsBimodal2d.description
+fitting.FitParsBoseBimodal2d.description
+fitting.FitParsGauss2d.description
+fitting.FitParsNoFit.description
+fitting.FitParsTF2d.description
+imagingpars.ImagingPars.description
+imagingpars.ImagingParsBlueFox.description
+imagingpars.ImagingParsHorizontal.description
+imagingpars.ImagingParsVertical.description" class="py-name" href="#" onclick="return doclink('link-13', 'description', 'link-0');">description</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'BlueFox'</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">    <tt id="link-14" class="py-name"><a title="imagingpars.ImagingPars.pixelsize
+imagingpars.ImagingParsBlueFox.pixelsize
+imagingpars.ImagingParsHorizontal.pixelsize
+imagingpars.ImagingParsVertical.pixelsize" class="py-name" href="#" onclick="return doclink('link-14', 'pixelsize', 'link-1');">pixelsize</a></tt> <tt class="py-op">=</tt> <tt class="py-number">7.4</tt> <tt class="py-comment">#pixelsize in &#181;m</tt> </tt>
+</div><a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >siscam</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Mar 12 18:29:27 2009
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

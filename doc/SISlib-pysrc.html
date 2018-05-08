@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>SISlib</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >siscam</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Module&nbsp;SISlib
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="SISlib-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="SISlib-module.html">Module SISlib</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#-*- coding: latin-1 -*-</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-docstring">"""Low level wrapper to SisApi."""</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">ctypes</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">numpy</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">ctypeslib</tt> <tt class="py-keyword">import</tt> <tt class="py-name">ndpointer</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment">#{ Constants for Get</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt id="link-0" class="py-name" targets="Variable SISlib.SISGET_NOTHING=SISlib-module.html#SISGET_NOTHING"><a title="SISlib.SISGET_NOTHING" class="py-name" href="#" onclick="return doclink('link-0', 'SISGET_NOTHING', 'link-0');">SISGET_NOTHING</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt id="link-1" class="py-name" targets="Variable SISlib.SISGET_SISDATAADDRESS=SISlib-module.html#SISGET_SISDATAADDRESS"><a title="SISlib.SISGET_SISDATAADDRESS" class="py-name" href="#" onclick="return doclink('link-1', 'SISGET_SISDATAADDRESS', 'link-1');">SISGET_SISDATAADDRESS</a></tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt>       <tt class="py-comment"># void *lpData</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt id="link-2" class="py-name" targets="Variable SISlib.SISGET_FRAMEWIDTH=SISlib-module.html#SISGET_FRAMEWIDTH"><a title="SISlib.SISGET_FRAMEWIDTH" class="py-name" href="#" onclick="return doclink('link-2', 'SISGET_FRAMEWIDTH', 'link-2');">SISGET_FRAMEWIDTH</a></tt> <tt class="py-op">=</tt> <tt class="py-number">2</tt>           <tt class="py-comment"># int *lpData</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt id="link-3" class="py-name" targets="Variable SISlib.SISGET_FRAMEHEIGHT=SISlib-module.html#SISGET_FRAMEHEIGHT"><a title="SISlib.SISGET_FRAMEHEIGHT" class="py-name" href="#" onclick="return doclink('link-3', 'SISGET_FRAMEHEIGHT', 'link-3');">SISGET_FRAMEHEIGHT</a></tt> <tt class="py-op">=</tt> <tt class="py-number">3</tt>          <tt class="py-comment"># int *lpData</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt id="link-4" class="py-name" targets="Variable SISlib.SISGET_ALLOCFRAMENUMBER=SISlib-module.html#SISGET_ALLOCFRAMENUMBER"><a title="SISlib.SISGET_ALLOCFRAMENUMBER" class="py-name" href="#" onclick="return doclink('link-4', 'SISGET_ALLOCFRAMENUMBER', 'link-4');">SISGET_ALLOCFRAMENUMBER</a></tt> <tt class="py-op">=</tt> <tt class="py-number">4</tt>     <tt class="py-comment"># int *lpData</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt id="link-5" class="py-name" targets="Variable SISlib.SISGET_ROI=SISlib-module.html#SISGET_ROI"><a title="SISlib.SISGET_ROI" class="py-name" href="#" onclick="return doclink('link-5', 'SISGET_ROI', 'link-5');">SISGET_ROI</a></tt> <tt class="py-op">=</tt> <tt class="py-number">5</tt>                  <tt class="py-comment"># RECT *lpData</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt id="link-6" class="py-name" targets="Variable SISlib.SISGET_ACQMODE=SISlib-module.html#SISGET_ACQMODE"><a title="SISlib.SISGET_ACQMODE" class="py-name" href="#" onclick="return doclink('link-6', 'SISGET_ACQMODE', 'link-6');">SISGET_ACQMODE</a></tt> <tt class="py-op">=</tt> <tt class="py-number">6</tt>              <tt class="py-comment"># int *lpData</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt id="link-7" class="py-name" targets="Variable SISlib.SISGET_ACQFRAMECOUNT=SISlib-module.html#SISGET_ACQFRAMECOUNT"><a title="SISlib.SISGET_ACQFRAMECOUNT" class="py-name" href="#" onclick="return doclink('link-7', 'SISGET_ACQFRAMECOUNT', 'link-7');">SISGET_ACQFRAMECOUNT</a></tt> <tt class="py-op">=</tt> <tt class="py-number">7</tt>        <tt class="py-comment"># int *lpData</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt id="link-8" class="py-name" targets="Variable SISlib.SISGET_ACQADDRESS=SISlib-module.html#SISGET_ACQADDRESS"><a title="SISlib.SISGET_ACQADDRESS" class="py-name" href="#" onclick="return doclink('link-8', 'SISGET_ACQADDRESS', 'link-8');">SISGET_ACQADDRESS</a></tt> <tt class="py-op">=</tt> <tt class="py-number">8</tt>           <tt class="py-comment"># WORD **lpData</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt id="link-9" class="py-name" targets="Variable SISlib.SISGET_ACTWIDTH=SISlib-module.html#SISGET_ACTWIDTH"><a title="SISlib.SISGET_ACTWIDTH" class="py-name" href="#" onclick="return doclink('link-9', 'SISGET_ACTWIDTH', 'link-9');">SISGET_ACTWIDTH</a></tt> <tt class="py-op">=</tt> <tt class="py-number">9</tt>             <tt class="py-comment"># int *lpData</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt id="link-10" class="py-name" targets="Variable SISlib.SISGET_ACTHEIGHT=SISlib-module.html#SISGET_ACTHEIGHT"><a title="SISlib.SISGET_ACTHEIGHT" class="py-name" href="#" onclick="return doclink('link-10', 'SISGET_ACTHEIGHT', 'link-10');">SISGET_ACTHEIGHT</a></tt> <tt class="py-op">=</tt> <tt class="py-number">10</tt>           <tt class="py-comment"># int *lpData</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt id="link-11" class="py-name" targets="Variable SISlib.SISGET_ACTROI=SISlib-module.html#SISGET_ACTROI"><a title="SISlib.SISGET_ACTROI" class="py-name" href="#" onclick="return doclink('link-11', 'SISGET_ACTROI', 'link-11');">SISGET_ACTROI</a></tt> <tt class="py-op">=</tt> <tt class="py-number">11</tt>              <tt class="py-comment"># RECT *lpData</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt id="link-12" class="py-name" targets="Variable SISlib.SISGET_ACTFRAMENR=SISlib-module.html#SISGET_ACTFRAMENR"><a title="SISlib.SISGET_ACTFRAMENR" class="py-name" href="#" onclick="return doclink('link-12', 'SISGET_ACTFRAMENR', 'link-12');">SISGET_ACTFRAMENR</a></tt> <tt class="py-op">=</tt> <tt class="py-number">12</tt>          <tt class="py-comment"># int *lpData</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt id="link-13" class="py-name" targets="Variable SISlib.SISGET_ACTFRAMEIX=SISlib-module.html#SISGET_ACTFRAMEIX"><a title="SISlib.SISGET_ACTFRAMEIX" class="py-name" href="#" onclick="return doclink('link-13', 'SISGET_ACTFRAMEIX', 'link-13');">SISGET_ACTFRAMEIX</a></tt> <tt class="py-op">=</tt> <tt class="py-number">13</tt>          <tt class="py-comment"># int *lpData</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt id="link-14" class="py-name" targets="Variable SISlib.SISGET_ACTSYNCTIME=SISlib-module.html#SISGET_ACTSYNCTIME"><a title="SISlib.SISGET_ACTSYNCTIME" class="py-name" href="#" onclick="return doclink('link-14', 'SISGET_ACTSYNCTIME', 'link-14');">SISGET_ACTSYNCTIME</a></tt> <tt class="py-op">=</tt> <tt class="py-number">14</tt>         <tt class="py-comment"># FILETIME *lpData</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt id="link-15" class="py-name" targets="Variable SISlib.SISGET_BINNINGENABLE=SISlib-module.html#SISGET_BINNINGENABLE"><a title="SISlib.SISGET_BINNINGENABLE" class="py-name" href="#" onclick="return doclink('link-15', 'SISGET_BINNINGENABLE', 'link-15');">SISGET_BINNINGENABLE</a></tt> <tt class="py-op">=</tt> <tt class="py-number">15</tt>       <tt class="py-comment"># bool *lpData</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt id="link-16" class="py-name" targets="Variable SISlib.SISGET_CAMERANAME=SISlib-module.html#SISGET_CAMERANAME"><a title="SISlib.SISGET_CAMERANAME" class="py-name" href="#" onclick="return doclink('link-16', 'SISGET_CAMERANAME', 'link-16');">SISGET_CAMERANAME</a></tt> <tt class="py-op">=</tt> <tt class="py-number">16</tt>          <tt class="py-comment"># char*</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt id="link-17" class="py-name" targets="Variable SISlib.SISGET_TIMETRIGGER=SISlib-module.html#SISGET_TIMETRIGGER"><a title="SISlib.SISGET_TIMETRIGGER" class="py-name" href="#" onclick="return doclink('link-17', 'SISGET_TIMETRIGGER', 'link-17');">SISGET_TIMETRIGGER</a></tt> <tt class="py-op">=</tt> <tt class="py-number">17</tt>         <tt class="py-comment"># FILETIME *lpData</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt id="link-18" class="py-name" targets="Variable SISlib.SISGET_INTTIME=SISlib-module.html#SISGET_INTTIME"><a title="SISlib.SISGET_INTTIME" class="py-name" href="#" onclick="return doclink('link-18', 'SISGET_INTTIME', 'link-18');">SISGET_INTTIME</a></tt> <tt class="py-op">=</tt> <tt class="py-number">18</tt>             <tt class="py-comment"># DWORD *lpData</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt id="link-19" class="py-name" targets="Variable SISlib.SISGET_REPTIME=SISlib-module.html#SISGET_REPTIME"><a title="SISlib.SISGET_REPTIME" class="py-name" href="#" onclick="return doclink('link-19', 'SISGET_REPTIME', 'link-19');">SISGET_REPTIME</a></tt> <tt class="py-op">=</tt> <tt class="py-number">19</tt>             <tt class="py-comment"># DWORD *lpData</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt id="link-20" class="py-name" targets="Variable SISlib.SISGET_MASTERMODE=SISlib-module.html#SISGET_MASTERMODE"><a title="SISlib.SISGET_MASTERMODE" class="py-name" href="#" onclick="return doclink('link-20', 'SISGET_MASTERMODE', 'link-20');">SISGET_MASTERMODE</a></tt> <tt class="py-op">=</tt> <tt class="py-number">20</tt>          <tt class="py-comment"># BYTE *lpData</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt id="link-21" class="py-name" targets="Variable SISlib.SISGET_OPMODE=SISlib-module.html#SISGET_OPMODE"><a title="SISlib.SISGET_OPMODE" class="py-name" href="#" onclick="return doclink('link-21', 'SISGET_OPMODE', 'link-21');">SISGET_OPMODE</a></tt> <tt class="py-op">=</tt> <tt class="py-number">21</tt>              <tt class="py-comment"># BYTE *lpData</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-comment">#}</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-comment"></tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-comment">#{ Error codes</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt id="link-22" class="py-name" targets="Variable SISlib.SIS_OK=SISlib-module.html#SIS_OK"><a title="SISlib.SIS_OK" class="py-name" href="#" onclick="return doclink('link-22', 'SIS_OK', 'link-22');">SIS_OK</a></tt>                   <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt id="link-23" class="py-name" targets="Variable SISlib.SIS_ERROR_UNKNOWN=SISlib-module.html#SIS_ERROR_UNKNOWN"><a title="SISlib.SIS_ERROR_UNKNOWN" class="py-name" href="#" onclick="return doclink('link-23', 'SIS_ERROR_UNKNOWN', 'link-23');">SIS_ERROR_UNKNOWN</a></tt>        <tt class="py-op">=</tt> <tt class="py-number">0x10000</tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt id="link-24" class="py-name" targets="Variable SISlib.SIS_ERROR_WRONGPARAMETER=SISlib-module.html#SIS_ERROR_WRONGPARAMETER"><a title="SISlib.SIS_ERROR_WRONGPARAMETER" class="py-name" href="#" onclick="return doclink('link-24', 'SIS_ERROR_WRONGPARAMETER', 'link-24');">SIS_ERROR_WRONGPARAMETER</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0x10000</tt> <tt class="py-op">+</tt> <tt class="py-number">2</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt id="link-25" class="py-name" targets="Variable SISlib.SIS_ERROR_WRONGHANDLE=SISlib-module.html#SIS_ERROR_WRONGHANDLE"><a title="SISlib.SIS_ERROR_WRONGHANDLE" class="py-name" href="#" onclick="return doclink('link-25', 'SIS_ERROR_WRONGHANDLE', 'link-25');">SIS_ERROR_WRONGHANDLE</a></tt>    <tt class="py-op">=</tt> <tt class="py-number">0x10000</tt> <tt class="py-op">+</tt> <tt class="py-number">3</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt id="link-26" class="py-name" targets="Variable SISlib.SIS_FUNCTIONNOTIMPL=SISlib-module.html#SIS_FUNCTIONNOTIMPL"><a title="SISlib.SIS_FUNCTIONNOTIMPL" class="py-name" href="#" onclick="return doclink('link-26', 'SIS_FUNCTIONNOTIMPL', 'link-26');">SIS_FUNCTIONNOTIMPL</a></tt>      <tt class="py-op">=</tt> <tt class="py-number">0x10000</tt> <tt class="py-op">+</tt> <tt class="py-number">4</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt id="link-27" class="py-name" targets="Variable SISlib.SIS_TIMEOUT=SISlib-module.html#SIS_TIMEOUT"><a title="SISlib.SIS_TIMEOUT" class="py-name" href="#" onclick="return doclink('link-27', 'SIS_TIMEOUT', 'link-27');">SIS_TIMEOUT</a></tt>              <tt class="py-op">=</tt> <tt class="py-number">0x10000</tt> <tt class="py-op">+</tt> <tt class="py-number">5</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt id="link-28" class="py-name" targets="Variable SISlib.SIS_CAMCONFIG=SISlib-module.html#SIS_CAMCONFIG"><a title="SISlib.SIS_CAMCONFIG" class="py-name" href="#" onclick="return doclink('link-28', 'SIS_CAMCONFIG', 'link-28');">SIS_CAMCONFIG</a></tt>            <tt class="py-op">=</tt> <tt class="py-number">0x10000</tt> <tt class="py-op">+</tt> <tt class="py-number">6</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt id="link-29" class="py-name" targets="Variable SISlib.SIS_NOTINIT=SISlib-module.html#SIS_NOTINIT"><a title="SISlib.SIS_NOTINIT" class="py-name" href="#" onclick="return doclink('link-29', 'SIS_NOTINIT', 'link-29');">SIS_NOTINIT</a></tt>              <tt class="py-op">=</tt> <tt class="py-number">0x10000</tt> <tt class="py-op">+</tt> <tt class="py-number">7</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt id="link-30" class="py-name" targets="Variable SISlib.SIS_ERROR_ALLOC=SISlib-module.html#SIS_ERROR_ALLOC"><a title="SISlib.SIS_ERROR_ALLOC" class="py-name" href="#" onclick="return doclink('link-30', 'SIS_ERROR_ALLOC', 'link-30');">SIS_ERROR_ALLOC</a></tt>          <tt class="py-op">=</tt> <tt class="py-number">0x10000</tt> <tt class="py-op">+</tt> <tt class="py-number">8</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-comment">#}</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-comment"></tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-comment">#{Acquistion modes</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt id="link-31" class="py-name" targets="Variable SISlib.SIS_ACQ_FREEZE=SISlib-module.html#SIS_ACQ_FREEZE"><a title="SISlib.SIS_ACQ_FREEZE" class="py-name" href="#" onclick="return doclink('link-31', 'SIS_ACQ_FREEZE', 'link-31');">SIS_ACQ_FREEZE</a></tt>     <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"><tt id="link-32" class="py-name" targets="Variable SISlib.SIS_ACQ_SINGLESHOT=SISlib-module.html#SIS_ACQ_SINGLESHOT"><a title="SISlib.SIS_ACQ_SINGLESHOT" class="py-name" href="#" onclick="return doclink('link-32', 'SIS_ACQ_SINGLESHOT', 'link-32');">SIS_ACQ_SINGLESHOT</a></tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt id="link-33" class="py-name" targets="Variable SISlib.SIS_ACQ_CONTINOUS=SISlib-module.html#SIS_ACQ_CONTINOUS"><a title="SISlib.SIS_ACQ_CONTINOUS" class="py-name" href="#" onclick="return doclink('link-33', 'SIS_ACQ_CONTINOUS', 'link-33');">SIS_ACQ_CONTINOUS</a></tt>  <tt class="py-op">=</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt class="py-comment">#}</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-comment"></tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt id="link-34" class="py-name" targets="Variable SISlib.SIS_DIAG_NOTHING=SISlib-module.html#SIS_DIAG_NOTHING"><a title="SISlib.SIS_DIAG_NOTHING" class="py-name" href="#" onclick="return doclink('link-34', 'SIS_DIAG_NOTHING', 'link-34');">SIS_DIAG_NOTHING</a></tt>        <tt class="py-op">=</tt> <tt class="py-number">0x00000000</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt id="link-35" class="py-name" targets="Variable SISlib.SIS_DIAG_GENERAL=SISlib-module.html#SIS_DIAG_GENERAL"><a title="SISlib.SIS_DIAG_GENERAL" class="py-name" href="#" onclick="return doclink('link-35', 'SIS_DIAG_GENERAL', 'link-35');">SIS_DIAG_GENERAL</a></tt>        <tt class="py-op">=</tt> <tt class="py-number">0x00000001</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt id="link-36" class="py-name" targets="Variable SISlib.SIS_DIAG_ADDRESSES=SISlib-module.html#SIS_DIAG_ADDRESSES"><a title="SISlib.SIS_DIAG_ADDRESSES" class="py-name" href="#" onclick="return doclink('link-36', 'SIS_DIAG_ADDRESSES', 'link-36');">SIS_DIAG_ADDRESSES</a></tt>      <tt class="py-op">=</tt> <tt class="py-number">0x00000002</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt id="link-37" class="py-name" targets="Variable SISlib.SIS_DIAG_ACQUISITION=SISlib-module.html#SIS_DIAG_ACQUISITION"><a title="SISlib.SIS_DIAG_ACQUISITION" class="py-name" href="#" onclick="return doclink('link-37', 'SIS_DIAG_ACQUISITION', 'link-37');">SIS_DIAG_ACQUISITION</a></tt>    <tt class="py-op">=</tt> <tt class="py-number">0x00000008</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt id="link-38" class="py-name" targets="Variable SISlib.SIS_DIAG_INTERRUPT=SISlib-module.html#SIS_DIAG_INTERRUPT"><a title="SISlib.SIS_DIAG_INTERRUPT" class="py-name" href="#" onclick="return doclink('link-38', 'SIS_DIAG_INTERRUPT', 'link-38');">SIS_DIAG_INTERRUPT</a></tt>      <tt class="py-op">=</tt> <tt class="py-number">0x00000010</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt id="link-39" class="py-name" targets="Variable SISlib.SIS_DIAG_MISCELLANEOUS=SISlib-module.html#SIS_DIAG_MISCELLANEOUS"><a title="SISlib.SIS_DIAG_MISCELLANEOUS" class="py-name" href="#" onclick="return doclink('link-39', 'SIS_DIAG_MISCELLANEOUS', 'link-39');">SIS_DIAG_MISCELLANEOUS</a></tt>  <tt class="py-op">=</tt> <tt class="py-number">0x00000020</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt id="link-40" class="py-name" targets="Variable SISlib.SIS_DIAG_BINNING=SISlib-module.html#SIS_DIAG_BINNING"><a title="SISlib.SIS_DIAG_BINNING" class="py-name" href="#" onclick="return doclink('link-40', 'SIS_DIAG_BINNING', 'link-40');">SIS_DIAG_BINNING</a></tt>        <tt class="py-op">=</tt> <tt class="py-number">0x00000040</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"><tt id="link-41" class="py-name" targets="Variable SISlib.SIS_DIAG_ALL=SISlib-module.html#SIS_DIAG_ALL"><a title="SISlib.SIS_DIAG_ALL" class="py-name" href="#" onclick="return doclink('link-41', 'SIS_DIAG_ALL', 'link-41');">SIS_DIAG_ALL</a></tt>            <tt class="py-op">=</tt> <tt class="py-number">0xFFFFFFFF</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt class="py-comment">#{ debug levels</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt id="link-42" class="py-name" targets="Variable SISlib.SIS_DEBUG_NOTHING=SISlib-module.html#SIS_DEBUG_NOTHING"><a title="SISlib.SIS_DEBUG_NOTHING" class="py-name" href="#" onclick="return doclink('link-42', 'SIS_DEBUG_NOTHING', 'link-42');">SIS_DEBUG_NOTHING</a></tt>       <tt class="py-op">=</tt> <tt class="py-number">0x00000000</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt id="link-43" class="py-name" targets="Variable SISlib.SIS_DEBUG_MESSAGEBOX=SISlib-module.html#SIS_DEBUG_MESSAGEBOX"><a title="SISlib.SIS_DEBUG_MESSAGEBOX" class="py-name" href="#" onclick="return doclink('link-43', 'SIS_DEBUG_MESSAGEBOX', 'link-43');">SIS_DEBUG_MESSAGEBOX</a></tt>    <tt class="py-op">=</tt> <tt class="py-number">0x00000001</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt id="link-44" class="py-name" targets="Variable SISlib.SIS_DEBUG_PCIINFO=SISlib-module.html#SIS_DEBUG_PCIINFO"><a title="SISlib.SIS_DEBUG_PCIINFO" class="py-name" href="#" onclick="return doclink('link-44', 'SIS_DEBUG_PCIINFO', 'link-44');">SIS_DEBUG_PCIINFO</a></tt>       <tt class="py-op">=</tt> <tt class="py-number">0x00000100</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt id="link-45" class="py-name" targets="Variable SISlib.SIS_DEBUG_SCANFRAME=SISlib-module.html#SIS_DEBUG_SCANFRAME"><a title="SISlib.SIS_DEBUG_SCANFRAME" class="py-name" href="#" onclick="return doclink('link-45', 'SIS_DEBUG_SCANFRAME', 'link-45');">SIS_DEBUG_SCANFRAME</a></tt>     <tt class="py-op">=</tt> <tt class="py-number">0x00000200</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt id="link-46" class="py-name" targets="Variable SISlib.SIS_DEBUG_TIME=SISlib-module.html#SIS_DEBUG_TIME"><a title="SISlib.SIS_DEBUG_TIME" class="py-name" href="#" onclick="return doclink('link-46', 'SIS_DEBUG_TIME', 'link-46');">SIS_DEBUG_TIME</a></tt>          <tt class="py-op">=</tt> <tt class="py-number">0x00000400</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt id="link-47" class="py-name" targets="Variable SISlib.SIS_DEBUG_LOGFILEPIXEL=SISlib-module.html#SIS_DEBUG_LOGFILEPIXEL"><a title="SISlib.SIS_DEBUG_LOGFILEPIXEL" class="py-name" href="#" onclick="return doclink('link-47', 'SIS_DEBUG_LOGFILEPIXEL', 'link-47');">SIS_DEBUG_LOGFILEPIXEL</a></tt>  <tt class="py-op">=</tt> <tt class="py-number">0x00000800</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt id="link-48" class="py-name" targets="Variable SISlib.SIS_DEBUG_SERIAL=SISlib-module.html#SIS_DEBUG_SERIAL"><a title="SISlib.SIS_DEBUG_SERIAL" class="py-name" href="#" onclick="return doclink('link-48', 'SIS_DEBUG_SERIAL', 'link-48');">SIS_DEBUG_SERIAL</a></tt>        <tt class="py-op">=</tt> <tt class="py-number">0x00001000</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt id="link-49" class="py-name" targets="Variable SISlib.SIS_DEBUG_STARTFUNCTION=SISlib-module.html#SIS_DEBUG_STARTFUNCTION"><a title="SISlib.SIS_DEBUG_STARTFUNCTION" class="py-name" href="#" onclick="return doclink('link-49', 'SIS_DEBUG_STARTFUNCTION', 'link-49');">SIS_DEBUG_STARTFUNCTION</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0x00002000</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt id="link-50" class="py-name" targets="Variable SISlib.SIS_DEBUG_TRIGGER=SISlib-module.html#SIS_DEBUG_TRIGGER"><a title="SISlib.SIS_DEBUG_TRIGGER" class="py-name" href="#" onclick="return doclink('link-50', 'SIS_DEBUG_TRIGGER', 'link-50');">SIS_DEBUG_TRIGGER</a></tt>       <tt class="py-op">=</tt> <tt class="py-number">0x00004000</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt id="link-51" class="py-name" targets="Variable SISlib.SIS_DEBUG_SETBINNING=SISlib-module.html#SIS_DEBUG_SETBINNING"><a title="SISlib.SIS_DEBUG_SETBINNING" class="py-name" href="#" onclick="return doclink('link-51', 'SIS_DEBUG_SETBINNING', 'link-51');">SIS_DEBUG_SETBINNING</a></tt>    <tt class="py-op">=</tt> <tt class="py-number">0x00008000</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt id="link-52" class="py-name" targets="Variable SISlib.SIS_DEBUG_ALL=SISlib-module.html#SIS_DEBUG_ALL"><a title="SISlib.SIS_DEBUG_ALL" class="py-name" href="#" onclick="return doclink('link-52', 'SIS_DEBUG_ALL', 'link-52');">SIS_DEBUG_ALL</a></tt>           <tt class="py-op">=</tt> <tt class="py-number">0xFFFFFF00</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt class="py-comment">#}</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-comment"></tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt id="link-53" class="py-name" targets="Variable SISlib.sis_error_description=SISlib-module.html#sis_error_description"><a title="SISlib.sis_error_description" class="py-name" href="#" onclick="return doclink('link-53', 'sis_error_description', 'link-53');">sis_error_description</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">    <tt id="link-54" class="py-name"><a title="SISlib.SIS_ERROR_UNKNOWN" class="py-name" href="#" onclick="return doclink('link-54', 'SIS_ERROR_UNKNOWN', 'link-23');">SIS_ERROR_UNKNOWN</a></tt>        <tt class="py-op">:</tt> <tt class="py-string">"unknown error"</tt><tt class="py-op">,</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">    <tt id="link-55" class="py-name"><a title="SISlib.SIS_ERROR_WRONGPARAMETER" class="py-name" href="#" onclick="return doclink('link-55', 'SIS_ERROR_WRONGPARAMETER', 'link-24');">SIS_ERROR_WRONGPARAMETER</a></tt> <tt class="py-op">:</tt> <tt class="py-string">"wrong parameter"</tt><tt class="py-op">,</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">    <tt id="link-56" class="py-name"><a title="SISlib.SIS_ERROR_WRONGHANDLE" class="py-name" href="#" onclick="return doclink('link-56', 'SIS_ERROR_WRONGHANDLE', 'link-25');">SIS_ERROR_WRONGHANDLE</a></tt>    <tt class="py-op">:</tt> <tt class="py-string">"wrong handle"</tt><tt class="py-op">,</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">    <tt id="link-57" class="py-name"><a title="SISlib.SIS_FUNCTIONNOTIMPL" class="py-name" href="#" onclick="return doclink('link-57', 'SIS_FUNCTIONNOTIMPL', 'link-26');">SIS_FUNCTIONNOTIMPL</a></tt>      <tt class="py-op">:</tt> <tt class="py-string">"function not implemented"</tt><tt class="py-op">,</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">    <tt id="link-58" class="py-name"><a title="SISlib.SIS_TIMEOUT" class="py-name" href="#" onclick="return doclink('link-58', 'SIS_TIMEOUT', 'link-27');">SIS_TIMEOUT</a></tt>              <tt class="py-op">:</tt> <tt class="py-string">"timeout"</tt><tt class="py-op">,</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">    <tt id="link-59" class="py-name"><a title="SISlib.SIS_CAMCONFIG" class="py-name" href="#" onclick="return doclink('link-59', 'SIS_CAMCONFIG', 'link-28');">SIS_CAMCONFIG</a></tt>            <tt class="py-op">:</tt> <tt class="py-string">"error configuring camera"</tt><tt class="py-op">,</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">    <tt id="link-60" class="py-name"><a title="SISlib.SIS_NOTINIT" class="py-name" href="#" onclick="return doclink('link-60', 'SIS_NOTINIT', 'link-29');">SIS_NOTINIT</a></tt>              <tt class="py-op">:</tt> <tt class="py-string">"not initialized"</tt><tt class="py-op">,</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">    <tt id="link-61" class="py-name"><a title="SISlib.SIS_ERROR_ALLOC" class="py-name" href="#" onclick="return doclink('link-61', 'SIS_ERROR_ALLOC', 'link-30');">SIS_ERROR_ALLOC</a></tt>          <tt class="py-op">:</tt> <tt class="py-string">"error allocating memory"</tt><tt class="py-op">,</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">    <tt class="py-op">}</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">     </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"> </tt>
+<a name="SislibError"></a><div id="SislibError-def"><a name="L88"></a><tt class="py-lineno"> 88</tt> <a class="py-toggle" href="#" id="SislibError-toggle" onclick="return toggle('SislibError');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="SISlib.SislibError-class.html">SislibError</a><tt class="py-op">(</tt><tt class="py-base-class">Exception</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SislibError-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="SislibError-expanded"><a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">    <tt class="py-docstring">"""Base class for exceptions generated by calls to Sislib-API</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"><tt class="py-docstring">    functions."""</tt> </tt>
+<a name="SislibError.__init__"></a><div id="SislibError.__init__-def"><a name="L91"></a><tt class="py-lineno"> 91</tt> <a class="py-toggle" href="#" id="SislibError.__init__-toggle" onclick="return toggle('SislibError.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="SISlib.SislibError-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">statuscode</tt><tt class="py-op">,</tt> <tt class="py-param">func</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SislibError.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SislibError.__init__-expanded"><a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">        <tt id="link-62" class="py-name" targets="Variable fitting.FitParsBimodal2d.description=fitting.FitParsBimodal2d-class.html#description,Variable fitting.FitParsBoseBimodal2d.description=fitting.FitParsBoseBimodal2d-class.html#description,Variable fitting.FitParsGauss2d.description=fitting.FitParsGauss2d-class.html#description,Variable fitting.FitParsNoFit.description=fitting.FitParsNoFit-class.html#description,Variable fitting.FitParsTF2d.description=fitting.FitParsTF2d-class.html#description,Variable imagingpars.ImagingPars.description=imagingpars.ImagingPars-class.html#description,Variable imagingpars.ImagingParsBlueFox.description=imagingpars.ImagingParsBlueFox-class.html#description,Variable imagingpars.ImagingParsHorizontal.description=imagingpars.ImagingParsHorizontal-class.html#description,Variable imagingpars.ImagingParsVertical.description=imagingpars.ImagingParsVertical-class.html#description"><a title="fitting.FitParsBimodal2d.description
+fitting.FitParsBoseBimodal2d.description
+fitting.FitParsGauss2d.description
+fitting.FitParsNoFit.description
+fitting.FitParsTF2d.description
+imagingpars.ImagingPars.description
+imagingpars.ImagingParsBlueFox.description
+imagingpars.ImagingParsHorizontal.description
+imagingpars.ImagingParsVertical.description" class="py-name" href="#" onclick="return doclink('link-62', 'description', 'link-62');">description</a></tt> <tt class="py-op">=</tt> \ </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">            <tt class="py-string">"Error in calling function &lt;%s&gt; of SisApi.dll: %s"</tt><tt class="py-op">%</tt>\ </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-name">func</tt><tt class="py-op">.</tt><tt class="py-name">__name__</tt><tt class="py-op">,</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">             <tt id="link-63" class="py-name"><a title="SISlib.sis_error_description" class="py-name" href="#" onclick="return doclink('link-63', 'sis_error_description', 'link-53');">sis_error_description</a></tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-name">statuscode</tt><tt class="py-op">,</tt><tt class="py-string">"no error description available"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-name">Exception</tt><tt class="py-op">.</tt><tt id="link-64" class="py-name" targets="Method DataPanel.DataPlotPanel.__init__()=DataPanel.DataPlotPanel-class.html#__init__,Method FitResultTableGrid.DynamicExpressionDialog.__init__()=FitResultTableGrid.DynamicExpressionDialog-class.html#__init__,Method FitResultTableGrid.FitResultDataTable.__init__()=FitResultTableGrid.FitResultDataTable-class.html#__init__,Method FitResultTableGrid.FitResultDataTableGrid.__init__()=FitResultTableGrid.FitResultDataTableGrid-class.html#__init__,Method FitResultTableGrid.GridPanel.__init__()=FitResultTableGrid.GridPanel-class.html#__init__,Method FitResultTableGrid.TabbedGridPanel.__init__()=FitResultTableGrid.TabbedGridPanel-class.html#__init__,Method FitResultTableGrid.TestFrame.__init__()=FitResultTableGrid.TestFrame-class.html#__init__,Method FitResultTableGrid.TestFrameNotebook.__init__()=FitResultTableGrid.TestFrameNotebook-class.html#__init__,Method IMPACT.Cam.__init__()=IMPACT.Cam-class.html#__init__,Method IMPACT.TimeoutError.__init__()=IMPACT.TimeoutError-class.html#__init__,Method ImagePanel.BitmapDisplay.__init__()=ImagePanel.BitmapDisplay-class.html#__init__,Method ImagePanel.BitmapDisplayOverlay.__init__()=ImagePanel.BitmapDisplayOverlay-class.html#__init__,Method ImagePanel.CamImageDisplay.__init__()=ImagePanel.CamImageDisplay-class.html#__init__,Method ImagePanel.CamImageMarkersPanel.__init__()=ImagePanel.CamImageMarkersPanel-class.html#__init__,Method ImagePanel.CamImagePanel.__init__()=ImagePanel.CamImagePanel-class.html#__init__,Method ImagePanel.CrossMarker.__init__()=ImagePanel.CrossMarker-class.html#__init__,Method ImagePanel.ImageDisplay.__init__()=ImagePanel.ImageDisplay-class.html#__init__,Method ImagePanel.ImageDisplayWithMarkersOverlayed.__init__()=ImagePanel.ImageDisplayWithMarkersOverlayed-class.html#__init__,Method ImagePanel.ImagePanel.__init__()=ImagePanel.ImagePanel-class.html#__init__,Method ImagePanel.Marker.__init__()=ImagePanel.Marker-class.html#__init__,Method ImagePanel.Point.__init__()=ImagePanel.Point-class.html#__init__,Method ImagePanel.RectMarker.__init__()=ImagePanel.RectMarker-class.html#__init__,Method ImagePanel.ZoomToolbar.__init__()=ImagePanel.ZoomToolbar-class.html#__init__,Method ImageTree.DirListEntry.__init__()=ImageTree.DirListEntry-class.html#__init__,Method ImageTree.ImageTree.__init__()=ImageTree.ImageTree-class.html#__init__,Method ImageTree.ImageTreePanel.__init__()=ImageTree.ImageTreePanel-class.html#__init__,Method ImageTree.LabeledList.__init__()=ImageTree.LabeledList-class.html#__init__,Method ImageTree.TreeModel.__init__()=ImageTree.TreeModel-class.html#__init__,Method ImageTree.TreeModelSync.__init__()=ImageTree.TreeModelSync-class.html#__init__,Method SIS.Cam.__init__()=SIS.Cam-class.html#__init__,Method SIS.PseudoCam.__init__()=SIS.PseudoCam-class.html#__init__,Method SISlib.Singleton.__init__()=SISlib.Singleton-class.html#__init__,Method SISlib.SisLibrary.__init__()=SISlib.SisLibrary-class.html#__init__,Method SISlib.SislibError.__init__()=SISlib.SislibError-class.html#__init__,Method SISlib.SislibTimeoutError.__init__()=SISlib.SislibTimeoutError-class.html#__init__,Method acquire.AcquireSplashScreen.__init__()=acquire.AcquireSplashScreen-class.html#__init__,Method acquire.AcquireThread.__init__()=acquire.AcquireThread-class.html#__init__,Method acquire.AcquireThreadSony.__init__()=acquire.AcquireThreadSony-class.html#__init__,Method acquire.CamTiming.__init__()=acquire.CamTiming-class.html#__init__,Method acquire.ConsumerThread.__init__()=acquire.ConsumerThread-class.html#__init__,Method acquire.TimingDialog.__init__()=acquire.TimingDialog-class.html#__init__,Method cam.CamCursor.__init__()=cam.CamCursor-class.html#__init__,Method cam.CamSplashScreen.__init__()=cam.CamSplashScreen-class.html#__init__,Method cam.ImgPanel.__init__()=cam.ImgPanel-class.html#__init__,Method cam.Selector.__init__()=cam.Selector-class.html#__init__,Method cam.XSelector.__init__()=cam.XSelector-class.html#__init__,Method cam.XYSelector.__init__()=cam.XYSelector-class.html#__init__,Method cam.YSelector.__init__()=cam.YSelector-class.html#__init__,Method ding.Ding.__init__()=ding.Ding-class.html#__init__,Method fitting.Bimodal2d.__init__()=fitting.Bimodal2d-class.html#__init__,Method fitting.BoseBimodal2d.__init__()=fitting.BoseBimodal2d-class.html#__init__,Method fitting.FitParsBimodal2d.__init__()=fitting.FitParsBimodal2d-class.html#__init__,Method fitting.FitParsGauss2d.__init__()=fitting.FitParsGauss2d-class.html#__init__,Method fitting.FitParsNoFit.__init__()=fitting.FitParsNoFit-class.html#__init__,Method fitting.FitParsTF2d.__init__()=fitting.FitParsTF2d-class.html#__init__,Method fitting.Gauss2d.__init__()=fitting.Gauss2d-class.html#__init__,Method fitting.GaussSym2d.__init__()=fitting.GaussSym2d-class.html#__init__,Method fitting.NoFit.__init__()=fitting.NoFit-class.html#__init__,Method gridtypes.BoolEditor.__init__()=gridtypes.BoolEditor-class.html#__init__,Method gridtypes.BoolRenderer.__init__()=gridtypes.BoolRenderer-class.html#__init__,Method gridtypes.FloatRenderer.__init__()=gridtypes.FloatRenderer-class.html#__init__,Method roi.ROI.__init__()=roi.ROI-class.html#__init__,Method toolbar.NavigationToolbar2Wx.__init__()=toolbar.NavigationToolbar2Wx-class.html#__init__"><a title="DataPanel.DataPlotPanel.__init__
+FitResultTableGrid.DynamicExpressionDialog.__init__
+FitResultTableGrid.FitResultDataTable.__init__
+FitResultTableGrid.FitResultDataTableGrid.__init__
+FitResultTableGrid.GridPanel.__init__
+FitResultTableGrid.TabbedGridPanel.__init__
+FitResultTableGrid.TestFrame.__init__
+FitResultTableGrid.TestFrameNotebook.__init__
+IMPACT.Cam.__init__
+IMPACT.TimeoutError.__init__
+ImagePanel.BitmapDisplay.__init__
+ImagePanel.BitmapDisplayOverlay.__init__
+ImagePanel.CamImageDisplay.__init__
+ImagePanel.CamImageMarkersPanel.__init__
+ImagePanel.CamImagePanel.__init__
+ImagePanel.CrossMarker.__init__
+ImagePanel.ImageDisplay.__init__
+ImagePanel.ImageDisplayWithMarkersOverlayed.__init__
+ImagePanel.ImagePanel.__init__
+ImagePanel.Marker.__init__
+ImagePanel.Point.__init__
+ImagePanel.RectMarker.__init__
+ImagePanel.ZoomToolbar.__init__
+ImageTree.DirListEntry.__init__
+ImageTree.ImageTree.__init__
+ImageTree.ImageTreePanel.__init__
+ImageTree.LabeledList.__init__
+ImageTree.TreeModel.__init__
+ImageTree.TreeModelSync.__init__
+SIS.Cam.__init__
+SIS.PseudoCam.__init__
+SISlib.Singleton.__init__
+SISlib.SisLibrary.__init__
+SISlib.SislibError.__init__
+SISlib.SislibTimeoutError.__init__
+acquire.AcquireSplashScreen.__init__
+acquire.AcquireThread.__init__
+acquire.AcquireThreadSony.__init__
+acquire.CamTiming.__init__
+acquire.ConsumerThread.__init__
+acquire.TimingDialog.__init__
+cam.CamCursor.__init__
+cam.CamSplashScreen.__init__
+cam.ImgPanel.__init__
+cam.Selector.__init__
+cam.XSelector.__init__
+cam.XYSelector.__init__
+cam.YSelector.__init__
+ding.Ding.__init__
+fitting.Bimodal2d.__init__
+fitting.BoseBimodal2d.__init__
+fitting.FitParsBimodal2d.__init__
+fitting.FitParsGauss2d.__init__
+fitting.FitParsNoFit.__init__
+fitting.FitParsTF2d.__init__
+fitting.Gauss2d.__init__
+fitting.GaussSym2d.__init__
+fitting.NoFit.__init__
+gridtypes.BoolEditor.__init__
+gridtypes.BoolRenderer.__init__
+gridtypes.FloatRenderer.__init__
+roi.ROI.__init__
+toolbar.NavigationToolbar2Wx.__init__" class="py-name" href="#" onclick="return doclink('link-64', '__init__', 'link-64');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt id="link-65" class="py-name"><a title="fitting.FitParsBimodal2d.description
+fitting.FitParsBoseBimodal2d.description
+fitting.FitParsGauss2d.description
+fitting.FitParsNoFit.description
+fitting.FitParsTF2d.description
+imagingpars.ImagingPars.description
+imagingpars.ImagingParsBlueFox.description
+imagingpars.ImagingParsHorizontal.description
+imagingpars.ImagingParsVertical.description" class="py-name" href="#" onclick="return doclink('link-65', 'description', 'link-62');">description</a></tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"> </tt>
+<a name="SislibTimeoutError"></a><div id="SislibTimeoutError-def"><a name="L98"></a><tt class="py-lineno"> 98</tt> <a class="py-toggle" href="#" id="SislibTimeoutError-toggle" onclick="return toggle('SislibTimeoutError');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="SISlib.SislibTimeoutError-class.html">SislibTimeoutError</a><tt class="py-op">(</tt><tt class="py-base-class">SislibError</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SislibTimeoutError-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="SislibTimeoutError-expanded"><a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">    <tt class="py-docstring">"""Timeout when waiting for image acquisition."""</tt> </tt>
+<a name="SislibTimeoutError.__init__"></a><div id="SislibTimeoutError.__init__-def"><a name="L100"></a><tt class="py-lineno">100</tt> <a class="py-toggle" href="#" id="SislibTimeoutError.__init__-toggle" onclick="return toggle('SislibTimeoutError.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="SISlib.SislibTimeoutError-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">statuscode</tt><tt class="py-op">,</tt> <tt class="py-param">func</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SislibTimeoutError.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SislibTimeoutError.__init__-expanded"><a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">        <tt id="link-66" class="py-name" targets="Class SISlib.SislibError=SISlib.SislibError-class.html"><a title="SISlib.SislibError" class="py-name" href="#" onclick="return doclink('link-66', 'SislibError', 'link-66');">SislibError</a></tt><tt class="py-op">.</tt><tt id="link-67" class="py-name"><a title="DataPanel.DataPlotPanel.__init__
+FitResultTableGrid.DynamicExpressionDialog.__init__
+FitResultTableGrid.FitResultDataTable.__init__
+FitResultTableGrid.FitResultDataTableGrid.__init__
+FitResultTableGrid.GridPanel.__init__
+FitResultTableGrid.TabbedGridPanel.__init__
+FitResultTableGrid.TestFrame.__init__
+FitResultTableGrid.TestFrameNotebook.__init__
+IMPACT.Cam.__init__
+IMPACT.TimeoutError.__init__
+ImagePanel.BitmapDisplay.__init__
+ImagePanel.BitmapDisplayOverlay.__init__
+ImagePanel.CamImageDisplay.__init__
+ImagePanel.CamImageMarkersPanel.__init__
+ImagePanel.CamImagePanel.__init__
+ImagePanel.CrossMarker.__init__
+ImagePanel.ImageDisplay.__init__
+ImagePanel.ImageDisplayWithMarkersOverlayed.__init__
+ImagePanel.ImagePanel.__init__
+ImagePanel.Marker.__init__
+ImagePanel.Point.__init__
+ImagePanel.RectMarker.__init__
+ImagePanel.ZoomToolbar.__init__
+ImageTree.DirListEntry.__init__
+ImageTree.ImageTree.__init__
+ImageTree.ImageTreePanel.__init__
+ImageTree.LabeledList.__init__
+ImageTree.TreeModel.__init__
+ImageTree.TreeModelSync.__init__
+SIS.Cam.__init__
+SIS.PseudoCam.__init__
+SISlib.Singleton.__init__
+SISlib.SisLibrary.__init__
+SISlib.SislibError.__init__
+SISlib.SislibTimeoutError.__init__
+acquire.AcquireSplashScreen.__init__
+acquire.AcquireThread.__init__
+acquire.AcquireThreadSony.__init__
+acquire.CamTiming.__init__
+acquire.ConsumerThread.__init__
+acquire.TimingDialog.__init__
+cam.CamCursor.__init__
+cam.CamSplashScreen.__init__
+cam.ImgPanel.__init__
+cam.Selector.__init__
+cam.XSelector.__init__
+cam.XYSelector.__init__
+cam.YSelector.__init__
+ding.Ding.__init__
+fitting.Bimodal2d.__init__
+fitting.BoseBimodal2d.__init__
+fitting.FitParsBimodal2d.__init__
+fitting.FitParsGauss2d.__init__
+fitting.FitParsNoFit.__init__
+fitting.FitParsTF2d.__init__
+fitting.Gauss2d.__init__
+fitting.GaussSym2d.__init__
+fitting.NoFit.__init__
+gridtypes.BoolEditor.__init__
+gridtypes.BoolRenderer.__init__
+gridtypes.FloatRenderer.__init__
+roi.ROI.__init__
+toolbar.NavigationToolbar2Wx.__init__" class="py-name" href="#" onclick="return doclink('link-67', '__init__', 'link-64');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">statuscode</tt><tt class="py-op">,</tt> <tt class="py-name">func</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"><tt id="link-68" class="py-name" targets="Variable SISlib.excdict=SISlib-module.html#excdict"><a title="SISlib.excdict" class="py-name" href="#" onclick="return doclink('link-68', 'excdict', 'link-68');">excdict</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt id="link-69" class="py-name"><a title="SISlib.SIS_TIMEOUT" class="py-name" href="#" onclick="return doclink('link-69', 'SIS_TIMEOUT', 'link-27');">SIS_TIMEOUT</a></tt><tt class="py-op">:</tt> <tt id="link-70" class="py-name" targets="Class SISlib.SislibTimeoutError=SISlib.SislibTimeoutError-class.html"><a title="SISlib.SislibTimeoutError" class="py-name" href="#" onclick="return doclink('link-70', 'SislibTimeoutError', 'link-70');">SislibTimeoutError</a></tt><tt class="py-op">}</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"><tt class="py-string">"""@var excdict: dictionary of errorcode/exception. Used to throw</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"><tt class="py-string">different Exceptions for different error codes returned by Sisapi</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"><tt class="py-string">functions. If errorcode is not contained in this dict, a base</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"><tt class="py-string">L{SislibError} is thrown."""</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"> </tt>
+<a name="RECT"></a><div id="RECT-def"><a name="L109"></a><tt class="py-lineno">109</tt> <a class="py-toggle" href="#" id="RECT-toggle" onclick="return toggle('RECT');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="SISlib.RECT-class.html">RECT</a><tt class="py-op">(</tt><tt class="py-base-class">ctypes</tt><tt class="py-op">.</tt><tt class="py-base-class">Structure</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="RECT-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="RECT-expanded"><a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">    <tt class="py-docstring">"""Wrap description of image rectangle into ctypes compatible</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt class="py-docstring">    structure"""</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">    <tt id="link-71" class="py-name" targets="Variable SISlib.RECT._fields_=SISlib.RECT-class.html#_fields_"><a title="SISlib.RECT._fields_" class="py-name" href="#" onclick="return doclink('link-71', '_fields_', 'link-71');">_fields_</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">(</tt><tt class="py-string">'left'</tt><tt class="py-op">,</tt> <tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_long</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">                <tt class="py-op">(</tt><tt class="py-string">'top'</tt><tt class="py-op">,</tt> <tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_long</tt><tt class="py-op">)</tt><tt class="py-op">,</tt>                 </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">                <tt class="py-op">(</tt><tt class="py-string">'right'</tt><tt class="py-op">,</tt> <tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_long</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">                <tt class="py-op">(</tt><tt class="py-string">'bottom'</tt><tt class="py-op">,</tt> <tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_long</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"> </tt>
+<a name="Singleton"></a><div id="Singleton-def"><a name="L117"></a><tt class="py-lineno">117</tt> <a class="py-toggle" href="#" id="Singleton-toggle" onclick="return toggle('Singleton');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="SISlib.Singleton-class.html">Singleton</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Singleton-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Singleton-expanded"><a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">    <tt class="py-docstring">"""Base class for singleton classes. Takes care that only a single</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"><tt class="py-docstring">    instance of this class is created.</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="Singleton.__new__"></a><div id="Singleton.__new__-def"><a name="L121"></a><tt class="py-lineno">121</tt> <a class="py-toggle" href="#" id="Singleton.__new__-toggle" onclick="return toggle('Singleton.__new__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="SISlib.Singleton-class.html#__new__">__new__</a><tt class="py-op">(</tt><tt class="py-param">cls</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwds</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Singleton.__new__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Singleton.__new__-expanded"><a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">        <tt class="py-name">it</tt> <tt class="py-op">=</tt> <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt class="py-name">__dict__</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-string">"__it__"</tt><tt class="py-op">)</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">it</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">it</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">        <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt class="py-name">__it__</tt> <tt class="py-op">=</tt> <tt class="py-name">it</tt> <tt class="py-op">=</tt> <tt class="py-name">object</tt><tt class="py-op">.</tt><tt id="link-72" class="py-name" targets="Static Method SISlib.Singleton.__new__()=SISlib.Singleton-class.html#__new__"><a title="SISlib.Singleton.__new__" class="py-name" href="#" onclick="return doclink('link-72', '__new__', 'link-72');">__new__</a></tt><tt class="py-op">(</tt><tt class="py-name">cls</tt><tt class="py-op">)</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">        <tt class="py-name">it</tt><tt class="py-op">.</tt><tt id="link-73" class="py-name" targets="Method SISlib.Singleton.init()=SISlib.Singleton-class.html#init"><a title="SISlib.Singleton.init" class="py-name" href="#" onclick="return doclink('link-73', 'init', 'link-73');">init</a></tt><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwds</tt><tt class="py-op">)</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">it</tt> </tt>
+</div><a name="Singleton.init"></a><div id="Singleton.init-def"><a name="L128"></a><tt class="py-lineno">128</tt> <a class="py-toggle" href="#" id="Singleton.init-toggle" onclick="return toggle('Singleton.init');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="SISlib.Singleton-class.html#init">init</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwds</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Singleton.init-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Singleton.init-expanded"><a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+</div><a name="Singleton.__init__"></a><div id="Singleton.__init__-def"><a name="L130"></a><tt class="py-lineno">130</tt> <a class="py-toggle" href="#" id="Singleton.__init__-toggle" onclick="return toggle('Singleton.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="SISlib.Singleton-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwds</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Singleton.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Singleton.__init__-expanded"><a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+</div></div><a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"> </tt>
+<a name="SisLibrary"></a><div id="SisLibrary-def"><a name="L133"></a><tt class="py-lineno">133</tt> <a class="py-toggle" href="#" id="SisLibrary-toggle" onclick="return toggle('SisLibrary');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="SISlib.SisLibrary-class.html">SisLibrary</a><tt class="py-op">(</tt><tt class="py-base-class">Singleton</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SisLibrary-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="SisLibrary-expanded"><a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">    <tt class="py-docstring">"""Provide access to functions of SisApi library."""</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"> </tt>
+<a name="SisLibrary.__init__"></a><div id="SisLibrary.__init__-def"><a name="L136"></a><tt class="py-lineno">136</tt> <a class="py-toggle" href="#" id="SisLibrary.__init__-toggle" onclick="return toggle('SisLibrary.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="SISlib.SisLibrary-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SisLibrary.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SisLibrary.__init__-expanded"><a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__lib</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line"> </tt>
+<a name="SisLibrary.load_library"></a><div id="SisLibrary.load_library-def"><a name="L139"></a><tt class="py-lineno">139</tt> <a class="py-toggle" href="#" id="SisLibrary.load_library-toggle" onclick="return toggle('SisLibrary.load_library');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="SISlib.SisLibrary-class.html#load_library">load_library</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">path</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SisLibrary.load_library-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SisLibrary.load_library-expanded"><a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">        <tt class="py-docstring">"""Load dynamic library. Can be called by user to load a specific library."""</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-74" class="py-name" targets="Variable ImageTree.DirListEntry.path=ImageTree.DirListEntry-class.html#path"><a title="ImageTree.DirListEntry.path" class="py-name" href="#" onclick="return doclink('link-74', 'path', 'link-74');">path</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__lib</tt> <tt class="py-op">=</tt> <tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">windll</tt><tt class="py-op">.</tt><tt class="py-name">LoadLibrary</tt><tt class="py-op">(</tt><tt id="link-75" class="py-name"><a title="ImageTree.DirListEntry.path" class="py-name" href="#" onclick="return doclink('link-75', 'path', 'link-74');">path</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__lib</tt> <tt class="py-op">=</tt> <tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">windll</tt><tt class="py-op">.</tt><tt class="py-name">SisApi</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-76" class="py-name" targets="Method SISlib.SisLibrary.__set_argument_types()=SISlib.SisLibrary-class.html#__set_argument_types"><a title="SISlib.SisLibrary.__set_argument_types" class="py-name" href="#" onclick="return doclink('link-76', '__set_argument_types', 'link-76');">__set_argument_types</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line"> </tt>
+<a name="SisLibrary.__call__"></a><div id="SisLibrary.__call__-def"><a name="L147"></a><tt class="py-lineno">147</tt> <a class="py-toggle" href="#" id="SisLibrary.__call__-toggle" onclick="return toggle('SisLibrary.__call__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="SISlib.SisLibrary-class.html#__call__">__call__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SisLibrary.__call__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SisLibrary.__call__-expanded"><a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__lib</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-77" class="py-name" targets="Method SISlib.SisLibrary.load_library()=SISlib.SisLibrary-class.html#load_library"><a title="SISlib.SisLibrary.load_library" class="py-name" href="#" onclick="return doclink('link-77', 'load_library', 'link-77');">load_library</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__lib</tt> </tt>
+</div><a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">     </tt>
+<a name="SisLibrary._sis_error_check"></a><div id="SisLibrary._sis_error_check-def"><a name="L152"></a><tt class="py-lineno">152</tt> <a class="py-toggle" href="#" id="SisLibrary._sis_error_check-toggle" onclick="return toggle('SisLibrary._sis_error_check');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="SISlib.SisLibrary-class.html#_sis_error_check">_sis_error_check</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">result</tt><tt class="py-op">,</tt> <tt class="py-param">func</tt><tt class="py-op">,</tt> <tt class="py-param">args</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SisLibrary._sis_error_check-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SisLibrary._sis_error_check-expanded"><a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">        <tt class="py-docstring">"""Create exception (see L{excdict}) if function returns an error.</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">result</tt> <tt class="py-op">!=</tt> <tt id="link-78" class="py-name"><a title="SISlib.SIS_OK" class="py-name" href="#" onclick="return doclink('link-78', 'SIS_OK', 'link-22');">SIS_OK</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">            <tt class="py-name">exc</tt> <tt class="py-op">=</tt> <tt id="link-79" class="py-name"><a title="SISlib.excdict" class="py-name" href="#" onclick="return doclink('link-79', 'excdict', 'link-68');">excdict</a></tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-name">result</tt><tt class="py-op">,</tt> <tt id="link-80" class="py-name"><a title="SISlib.SislibError" class="py-name" href="#" onclick="return doclink('link-80', 'SislibError', 'link-66');">SislibError</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">exc</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-name">result</tt><tt class="py-op">,</tt> <tt class="py-name">func</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"> </tt>
+<a name="SisLibrary.__set_argument_types"></a><div id="SisLibrary.__set_argument_types-def"><a name="L159"></a><tt class="py-lineno">159</tt> <a class="py-toggle" href="#" id="SisLibrary.__set_argument_types-toggle" onclick="return toggle('SisLibrary.__set_argument_types');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="SISlib.SisLibrary-class.html#__set_argument_types">__set_argument_types</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SisLibrary.__set_argument_types-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SisLibrary.__set_argument_types-expanded"><a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">        <tt class="py-docstring">"""Declare arguments and return types."""</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">sis_function</tt> <tt class="py-keyword">in</tt> <tt class="py-op">[</tt><tt class="py-string">"sis_Open"</tt><tt class="py-op">,</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">                             <tt class="py-string">"sis_Reset"</tt><tt class="py-op">,</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">                             <tt class="py-string">"sis_Close"</tt><tt class="py-op">,</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">                             <tt class="py-string">"sis_StartAcq"</tt><tt class="py-op">,</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">                             <tt class="py-string">"sis_WaitAcqEnd"</tt><tt class="py-op">,</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">                             <tt class="py-string">"sis_StopAcq"</tt><tt class="py-op">,</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">                             <tt class="py-string">"sis_SetROI"</tt><tt class="py-op">,</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">                             <tt class="py-string">"sis_Get"</tt><tt class="py-op">,</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">                             <tt class="py-string">"sis_CopyAcqData"</tt><tt class="py-op">,</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">                             <tt class="py-string">"sis_GetDriverRevision"</tt><tt class="py-op">,</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">                             <tt class="py-string">"sis_TextOutSisData"</tt><tt class="py-op">,</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">                             <tt class="py-string">"sis_SetTiming"</tt><tt class="py-op">,</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">                             <tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__lib</tt><tt class="py-op">.</tt><tt class="py-name">__getattr__</tt><tt class="py-op">(</tt><tt class="py-name">sis_function</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">errcheck</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-81" class="py-name" targets="Method SISlib.SisLibrary._sis_error_check()=SISlib.SisLibrary-class.html#_sis_error_check"><a title="SISlib.SisLibrary._sis_error_check" class="py-name" href="#" onclick="return doclink('link-81', '_sis_error_check', 'link-81');">_sis_error_check</a></tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line">             </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__lib</tt><tt class="py-op">.</tt><tt class="py-name">sis_Open</tt><tt class="py-op">.</tt><tt class="py-name">argtypes</tt> <tt class="py-op">=</tt> \ </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">                 <tt class="py-op">[</tt><tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_int</tt><tt class="py-op">,</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">                  <tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_char_p</tt><tt class="py-op">]</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line"> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__lib</tt><tt class="py-op">.</tt><tt class="py-name">sis_Reset</tt><tt class="py-op">.</tt><tt class="py-name">argtypes</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_int</tt><tt class="py-op">]</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line"> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__lib</tt><tt class="py-op">.</tt><tt class="py-name">sis_Close</tt><tt class="py-op">.</tt><tt class="py-name">argtypes</tt> <tt class="py-op">=</tt> \ </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line">            <tt class="py-op">[</tt><tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_int</tt><tt class="py-op">]</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">         </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__lib</tt><tt class="py-op">.</tt><tt class="py-name">sis_StartAcq</tt><tt class="py-op">.</tt><tt class="py-name">argtypes</tt> <tt class="py-op">=</tt> \ </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line">            <tt class="py-op">[</tt><tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_int</tt><tt class="py-op">,</tt>  </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">             <tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_int</tt><tt class="py-op">]</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line">         </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__lib</tt><tt class="py-op">.</tt><tt class="py-name">sis_WaitAcqEnd</tt><tt class="py-op">.</tt><tt class="py-name">argtypes</tt> <tt class="py-op">=</tt> \ </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line">            <tt class="py-op">[</tt><tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_int</tt><tt class="py-op">,</tt>  </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line">             <tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_int</tt><tt class="py-op">]</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line"> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__lib</tt><tt class="py-op">.</tt><tt class="py-name">sis_StopAcq</tt><tt class="py-op">.</tt><tt class="py-name">argtypes</tt> <tt class="py-op">=</tt> \ </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line">            <tt class="py-op">[</tt><tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_int</tt><tt class="py-op">]</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line">    </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__lib</tt><tt class="py-op">.</tt><tt class="py-name">sis_Get</tt><tt class="py-op">.</tt><tt class="py-name">argtypes</tt> <tt class="py-op">=</tt> \ </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line">            <tt class="py-op">[</tt><tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_int</tt><tt class="py-op">,</tt>  </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line">             <tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_int</tt><tt class="py-op">,</tt>  </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line">             <tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_void_p</tt><tt class="py-op">]</tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line"> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__lib</tt><tt class="py-op">.</tt><tt class="py-name">sis_SetROI</tt><tt class="py-op">.</tt><tt class="py-name">argtypes</tt> <tt class="py-op">=</tt> \ </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line">            <tt class="py-op">[</tt><tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_int</tt><tt class="py-op">,</tt> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line">             <tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_void_p</tt><tt class="py-op">]</tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line"> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__lib</tt><tt class="py-op">.</tt><tt class="py-name">sis_CopyAcqData</tt><tt class="py-op">.</tt><tt class="py-name">argtypes</tt> <tt class="py-op">=</tt> \ </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line">            <tt class="py-op">[</tt><tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_int</tt><tt class="py-op">,</tt>  </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line">             <tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_int</tt><tt class="py-op">,</tt>  </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line">             <tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_void_p</tt><tt class="py-op">]</tt> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line"> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__lib</tt><tt class="py-op">.</tt><tt class="py-name">sis_CopyAcqData</tt><tt class="py-op">.</tt><tt class="py-name">argtypes</tt> <tt class="py-op">=</tt> \ </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line">            <tt class="py-op">[</tt><tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_int</tt><tt class="py-op">,</tt>  </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">             <tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_int</tt><tt class="py-op">,</tt>  </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line">             <tt class="py-name">ndpointer</tt><tt class="py-op">(</tt><tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">uint16</tt><tt class="py-op">,</tt> <tt class="py-name">flags</tt> <tt class="py-op">=</tt> <tt class="py-string">'aligned, contiguous, writeable'</tt><tt class="py-op">)</tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line">             <tt class="py-op">]</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line"> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__lib</tt><tt class="py-op">.</tt><tt class="py-name">sis_GetDriverRevision</tt><tt class="py-op">.</tt><tt class="py-name">argtypes</tt> <tt class="py-op">=</tt> \ </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line">            <tt class="py-op">[</tt><tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_char_p</tt><tt class="py-op">]</tt> </tt>
+<a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line">         </tt>
+<a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__lib</tt><tt class="py-op">.</tt><tt class="py-name">sis_TextOutSisData</tt><tt class="py-op">.</tt><tt class="py-name">argtypes</tt> <tt class="py-op">=</tt> \ </tt>
+<a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line">            <tt class="py-op">[</tt><tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_int</tt><tt class="py-op">,</tt> <tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_char_p</tt><tt class="py-op">,</tt> <tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_uint32</tt><tt class="py-op">]</tt> </tt>
+<a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line">              </tt>
+<a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__lib</tt><tt class="py-op">.</tt><tt class="py-name">sis_SetTiming</tt><tt class="py-op">.</tt><tt class="py-name">argtypes</tt> <tt class="py-op">=</tt> \ </tt>
+<a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line">            <tt class="py-op">[</tt><tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_int</tt><tt class="py-op">,</tt> <tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_uint32</tt><tt class="py-op">,</tt> <tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_uint32</tt><tt class="py-op">]</tt> </tt>
+</div></div><a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >siscam</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Mar 12 18:29:30 2009
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

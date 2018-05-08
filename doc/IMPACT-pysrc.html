@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>IMPACT</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >siscam</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Module&nbsp;IMPACT
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="IMPACT-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="IMPACT-module.html">Module IMPACT</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#-*- coding: latin-1 -*-</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-docstring">"""High level interface to Matrix Vision cams (mvBlueFOX)."""</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">numpy</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">ctypes</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">mvIMPACT</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Module acquire=acquire-module.html"><a title="acquire" class="py-name" href="#" onclick="return doclink('link-0', 'acquire', 'link-0');">acquire</a></tt> <tt class="py-keyword">as</tt> <tt class="py-name">MV</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment">#hack to releas GIL during wait</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt id="link-1" class="py-name" targets="Variable IMPACT.MVll=IMPACT-module.html#MVll"><a title="IMPACT.MVll" class="py-name" href="#" onclick="return doclink('link-1', 'MVll', 'link-1');">MVll</a></tt> <tt class="py-op">=</tt> <tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">windll</tt><tt class="py-op">.</tt><tt class="py-name">mvDeviceManager</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt id="link-2" class="py-name" targets="Variable IMPACT.llWait=IMPACT-module.html#llWait"><a title="IMPACT.llWait" class="py-name" href="#" onclick="return doclink('link-2', 'llWait', 'link-2');">llWait</a></tt> <tt class="py-op">=</tt> <tt id="link-3" class="py-name"><a title="IMPACT.MVll" class="py-name" href="#" onclick="return doclink('link-3', 'MVll', 'link-1');">MVll</a></tt><tt class="py-op">.</tt><tt class="py-name">DMR_ImageRequestWaitFor</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt id="link-4" class="py-name"><a title="IMPACT.llWait" class="py-name" href="#" onclick="return doclink('link-4', 'llWait', 'link-2');">llWait</a></tt><tt class="py-op">.</tt><tt class="py-name">argtypes</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_int</tt><tt class="py-op">,</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line">                   <tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_int</tt><tt class="py-op">,</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line">                   <tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_int</tt><tt class="py-op">,</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line">                   <tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">POINTER</tt><tt class="py-op">(</tt><tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_int</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt id="link-5" class="py-name"><a title="IMPACT.llWait" class="py-name" href="#" onclick="return doclink('link-5', 'llWait', 'link-2');">llWait</a></tt><tt class="py-op">.</tt><tt class="py-name">restype</tt> <tt class="py-op">=</tt> <tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_int</tt> </tt>
+<a name="TimeoutError"></a><div id="TimeoutError-def"><a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-comment"></tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt> <a class="py-toggle" href="#" id="TimeoutError-toggle" onclick="return toggle('TimeoutError');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="IMPACT.TimeoutError-class.html">TimeoutError</a><tt class="py-op">(</tt><tt class="py-base-class">Exception</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TimeoutError-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="TimeoutError-expanded"><a name="TimeoutError.__init__"></a><div id="TimeoutError.__init__-def"><a name="L22"></a><tt class="py-lineno"> 22</tt> <a class="py-toggle" href="#" id="TimeoutError.__init__-toggle" onclick="return toggle('TimeoutError.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="IMPACT.TimeoutError-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TimeoutError.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="TimeoutError.__init__-expanded"><a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">        <tt class="py-name">Exception</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Method DataPanel.DataPlotPanel.__init__()=DataPanel.DataPlotPanel-class.html#__init__,Method FitResultTableGrid.DynamicExpressionDialog.__init__()=FitResultTableGrid.DynamicExpressionDialog-class.html#__init__,Method FitResultTableGrid.FitResultDataTable.__init__()=FitResultTableGrid.FitResultDataTable-class.html#__init__,Method FitResultTableGrid.FitResultDataTableGrid.__init__()=FitResultTableGrid.FitResultDataTableGrid-class.html#__init__,Method FitResultTableGrid.GridPanel.__init__()=FitResultTableGrid.GridPanel-class.html#__init__,Method FitResultTableGrid.TabbedGridPanel.__init__()=FitResultTableGrid.TabbedGridPanel-class.html#__init__,Method FitResultTableGrid.TestFrame.__init__()=FitResultTableGrid.TestFrame-class.html#__init__,Method FitResultTableGrid.TestFrameNotebook.__init__()=FitResultTableGrid.TestFrameNotebook-class.html#__init__,Method IMPACT.Cam.__init__()=IMPACT.Cam-class.html#__init__,Method IMPACT.TimeoutError.__init__()=IMPACT.TimeoutError-class.html#__init__,Method ImagePanel.BitmapDisplay.__init__()=ImagePanel.BitmapDisplay-class.html#__init__,Method ImagePanel.BitmapDisplayOverlay.__init__()=ImagePanel.BitmapDisplayOverlay-class.html#__init__,Method ImagePanel.CamImageDisplay.__init__()=ImagePanel.CamImageDisplay-class.html#__init__,Method ImagePanel.CamImageMarkersPanel.__init__()=ImagePanel.CamImageMarkersPanel-class.html#__init__,Method ImagePanel.CamImagePanel.__init__()=ImagePanel.CamImagePanel-class.html#__init__,Method ImagePanel.CrossMarker.__init__()=ImagePanel.CrossMarker-class.html#__init__,Method ImagePanel.ImageDisplay.__init__()=ImagePanel.ImageDisplay-class.html#__init__,Method ImagePanel.ImageDisplayWithMarkersOverlayed.__init__()=ImagePanel.ImageDisplayWithMarkersOverlayed-class.html#__init__,Method ImagePanel.ImagePanel.__init__()=ImagePanel.ImagePanel-class.html#__init__,Method ImagePanel.Marker.__init__()=ImagePanel.Marker-class.html#__init__,Method ImagePanel.Point.__init__()=ImagePanel.Point-class.html#__init__,Method ImagePanel.RectMarker.__init__()=ImagePanel.RectMarker-class.html#__init__,Method ImagePanel.ZoomToolbar.__init__()=ImagePanel.ZoomToolbar-class.html#__init__,Method ImageTree.DirListEntry.__init__()=ImageTree.DirListEntry-class.html#__init__,Method ImageTree.ImageTree.__init__()=ImageTree.ImageTree-class.html#__init__,Method ImageTree.ImageTreePanel.__init__()=ImageTree.ImageTreePanel-class.html#__init__,Method ImageTree.LabeledList.__init__()=ImageTree.LabeledList-class.html#__init__,Method ImageTree.TreeModel.__init__()=ImageTree.TreeModel-class.html#__init__,Method ImageTree.TreeModelSync.__init__()=ImageTree.TreeModelSync-class.html#__init__,Method SIS.Cam.__init__()=SIS.Cam-class.html#__init__,Method SIS.PseudoCam.__init__()=SIS.PseudoCam-class.html#__init__,Method SISlib.Singleton.__init__()=SISlib.Singleton-class.html#__init__,Method SISlib.SisLibrary.__init__()=SISlib.SisLibrary-class.html#__init__,Method SISlib.SislibError.__init__()=SISlib.SislibError-class.html#__init__,Method SISlib.SislibTimeoutError.__init__()=SISlib.SislibTimeoutError-class.html#__init__,Method acquire.AcquireSplashScreen.__init__()=acquire.AcquireSplashScreen-class.html#__init__,Method acquire.AcquireThread.__init__()=acquire.AcquireThread-class.html#__init__,Method acquire.AcquireThreadSony.__init__()=acquire.AcquireThreadSony-class.html#__init__,Method acquire.CamTiming.__init__()=acquire.CamTiming-class.html#__init__,Method acquire.ConsumerThread.__init__()=acquire.ConsumerThread-class.html#__init__,Method acquire.TimingDialog.__init__()=acquire.TimingDialog-class.html#__init__,Method cam.CamCursor.__init__()=cam.CamCursor-class.html#__init__,Method cam.CamSplashScreen.__init__()=cam.CamSplashScreen-class.html#__init__,Method cam.ImgPanel.__init__()=cam.ImgPanel-class.html#__init__,Method cam.Selector.__init__()=cam.Selector-class.html#__init__,Method cam.XSelector.__init__()=cam.XSelector-class.html#__init__,Method cam.XYSelector.__init__()=cam.XYSelector-class.html#__init__,Method cam.YSelector.__init__()=cam.YSelector-class.html#__init__,Method ding.Ding.__init__()=ding.Ding-class.html#__init__,Method fitting.Bimodal2d.__init__()=fitting.Bimodal2d-class.html#__init__,Method fitting.BoseBimodal2d.__init__()=fitting.BoseBimodal2d-class.html#__init__,Method fitting.FitParsBimodal2d.__init__()=fitting.FitParsBimodal2d-class.html#__init__,Method fitting.FitParsGauss2d.__init__()=fitting.FitParsGauss2d-class.html#__init__,Method fitting.FitParsNoFit.__init__()=fitting.FitParsNoFit-class.html#__init__,Method fitting.FitParsTF2d.__init__()=fitting.FitParsTF2d-class.html#__init__,Method fitting.Gauss2d.__init__()=fitting.Gauss2d-class.html#__init__,Method fitting.GaussSym2d.__init__()=fitting.GaussSym2d-class.html#__init__,Method fitting.NoFit.__init__()=fitting.NoFit-class.html#__init__,Method gridtypes.BoolEditor.__init__()=gridtypes.BoolEditor-class.html#__init__,Method gridtypes.BoolRenderer.__init__()=gridtypes.BoolRenderer-class.html#__init__,Method gridtypes.FloatRenderer.__init__()=gridtypes.FloatRenderer-class.html#__init__,Method roi.ROI.__init__()=roi.ROI-class.html#__init__,Method toolbar.NavigationToolbar2Wx.__init__()=toolbar.NavigationToolbar2Wx-class.html#__init__"><a title="DataPanel.DataPlotPanel.__init__
+FitResultTableGrid.DynamicExpressionDialog.__init__
+FitResultTableGrid.FitResultDataTable.__init__
+FitResultTableGrid.FitResultDataTableGrid.__init__
+FitResultTableGrid.GridPanel.__init__
+FitResultTableGrid.TabbedGridPanel.__init__
+FitResultTableGrid.TestFrame.__init__
+FitResultTableGrid.TestFrameNotebook.__init__
+IMPACT.Cam.__init__
+IMPACT.TimeoutError.__init__
+ImagePanel.BitmapDisplay.__init__
+ImagePanel.BitmapDisplayOverlay.__init__
+ImagePanel.CamImageDisplay.__init__
+ImagePanel.CamImageMarkersPanel.__init__
+ImagePanel.CamImagePanel.__init__
+ImagePanel.CrossMarker.__init__
+ImagePanel.ImageDisplay.__init__
+ImagePanel.ImageDisplayWithMarkersOverlayed.__init__
+ImagePanel.ImagePanel.__init__
+ImagePanel.Marker.__init__
+ImagePanel.Point.__init__
+ImagePanel.RectMarker.__init__
+ImagePanel.ZoomToolbar.__init__
+ImageTree.DirListEntry.__init__
+ImageTree.ImageTree.__init__
+ImageTree.ImageTreePanel.__init__
+ImageTree.LabeledList.__init__
+ImageTree.TreeModel.__init__
+ImageTree.TreeModelSync.__init__
+SIS.Cam.__init__
+SIS.PseudoCam.__init__
+SISlib.Singleton.__init__
+SISlib.SisLibrary.__init__
+SISlib.SislibError.__init__
+SISlib.SislibTimeoutError.__init__
+acquire.AcquireSplashScreen.__init__
+acquire.AcquireThread.__init__
+acquire.AcquireThreadSony.__init__
+acquire.CamTiming.__init__
+acquire.ConsumerThread.__init__
+acquire.TimingDialog.__init__
+cam.CamCursor.__init__
+cam.CamSplashScreen.__init__
+cam.ImgPanel.__init__
+cam.Selector.__init__
+cam.XSelector.__init__
+cam.XYSelector.__init__
+cam.YSelector.__init__
+ding.Ding.__init__
+fitting.Bimodal2d.__init__
+fitting.BoseBimodal2d.__init__
+fitting.FitParsBimodal2d.__init__
+fitting.FitParsGauss2d.__init__
+fitting.FitParsNoFit.__init__
+fitting.FitParsTF2d.__init__
+fitting.Gauss2d.__init__
+fitting.GaussSym2d.__init__
+fitting.NoFit.__init__
+gridtypes.BoolEditor.__init__
+gridtypes.BoolRenderer.__init__
+gridtypes.FloatRenderer.__init__
+roi.ROI.__init__
+toolbar.NavigationToolbar2Wx.__init__" class="py-name" href="#" onclick="return doclink('link-6', '__init__', 'link-6');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-string">'Timeout'</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"> </tt>
+<a name="Cam"></a><div id="Cam-def"><a name="L25"></a><tt class="py-lineno"> 25</tt> <a class="py-toggle" href="#" id="Cam-toggle" onclick="return toggle('Cam');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="IMPACT.Cam-class.html">Cam</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cam-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Cam-expanded"><a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">    <tt class="py-docstring">"""High level represantion of Theta-Systems Cam."""</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"> </tt>
+<a name="Cam.__init__"></a><div id="Cam.__init__-def"><a name="L28"></a><tt class="py-lineno"> 28</tt> <a class="py-toggle" href="#" id="Cam.__init__-toggle" onclick="return toggle('Cam.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="IMPACT.Cam-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cam.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Cam.__init__-expanded"><a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-string">'init'</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_data</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_device_manager</tt> <tt class="py-op">=</tt> <tt class="py-name">MV</tt><tt class="py-op">.</tt><tt class="py-name">DeviceManager</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">device</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_device_manager</tt><tt class="py-op">.</tt><tt class="py-name">getDeviceByProduct</tt><tt class="py-op">(</tt><tt class="py-string">'mvBlueFOX-120AG'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"> </tt>
+<a name="Cam.open"></a><div id="Cam.open-def"><a name="L34"></a><tt class="py-lineno"> 34</tt> <a class="py-toggle" href="#" id="Cam.open-toggle" onclick="return toggle('Cam.open');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="IMPACT.Cam-class.html#open">open</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cam.open-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Cam.open-expanded"><a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-string">'open bluefox'</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">device</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method IMPACT.Cam.open()=IMPACT.Cam-class.html#open,Method SIS.Cam.open()=SIS.Cam-class.html#open,Method SIS.PseudoCam.open()=SIS.PseudoCam-class.html#open"><a title="IMPACT.Cam.open
+SIS.Cam.open
+SIS.PseudoCam.open" class="py-name" href="#" onclick="return doclink('link-7', 'open', 'link-7');">open</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">         </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Module cam=cam-module.html"><a title="cam" class="py-name" href="#" onclick="return doclink('link-8', 'cam', 'link-8');">cam</a></tt> <tt class="py-op">=</tt> <tt class="py-name">MV</tt><tt class="py-op">.</tt><tt class="py-name">FunctionInterface</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">device</tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name"><a title="cam" class="py-name" href="#" onclick="return doclink('link-9', 'cam', 'link-8');">cam</a></tt><tt class="py-op">.</tt><tt class="py-name">ensureRequests</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt> </tt>
+</div><a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"> </tt>
+<a name="Cam.close"></a><div id="Cam.close-def"><a name="L42"></a><tt class="py-lineno"> 42</tt> <a class="py-toggle" href="#" id="Cam.close-toggle" onclick="return toggle('Cam.close');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="IMPACT.Cam-class.html#close">close</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cam.close-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Cam.close-expanded"><a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-string">'close bluefox'</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">device</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Method IMPACT.Cam.close()=IMPACT.Cam-class.html#close,Method SIS.Cam.close()=SIS.Cam-class.html#close,Method SIS.PseudoCam.close()=SIS.PseudoCam-class.html#close"><a title="IMPACT.Cam.close
+SIS.Cam.close
+SIS.PseudoCam.close" class="py-name" href="#" onclick="return doclink('link-10', 'close', 'link-10');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"> </tt>
+<a name="Cam.wait"></a><div id="Cam.wait-def"><a name="L46"></a><tt class="py-lineno"> 46</tt> <a class="py-toggle" href="#" id="Cam.wait-toggle" onclick="return toggle('Cam.wait');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="IMPACT.Cam-class.html#wait">wait</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">timeout</tt><tt class="py-op">=</tt><tt class="py-number">1000</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cam.wait-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Cam.wait-expanded"><a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">        <tt class="py-docstring">"""wait for next image to acquired. timeout in ms"""</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">        <tt class="py-comment">#TODO: set timeout property!!</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="cam" class="py-name" href="#" onclick="return doclink('link-11', 'cam', 'link-8');">cam</a></tt><tt class="py-op">.</tt><tt class="py-name">imageRequestSingle</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">        <tt class="py-name">nr</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="cam" class="py-name" href="#" onclick="return doclink('link-12', 'cam', 'link-8');">cam</a></tt><tt class="py-op">.</tt><tt class="py-name">imageRequestWaitFor</tt><tt class="py-op">(</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">        <tt class="py-comment">##hack to release GIL during wait, instead of imageRequestWaitFor()</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-comment">#nr = ctypes.c_int(0)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-comment">#errorcode = llWait(self.device.hDrv(),</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-comment">#                   #timeout,</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-comment">#                   -1,</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-comment">#                   0,</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-comment">#                   ctypes.byref(nr))</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-comment">#nr = nr.value</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-comment">#-----------</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt class="py-comment"></tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_data</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="cam" class="py-name" href="#" onclick="return doclink('link-13', 'cam', 'link-8');">cam</a></tt><tt class="py-op">.</tt><tt class="py-name">isRequestNrValid</tt><tt class="py-op">(</tt><tt class="py-name">nr</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">            <tt class="py-keyword">print</tt> <tt class="py-string">"request is not valid (perhaps timeout in RequestWaitFor"</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="cam" class="py-name" href="#" onclick="return doclink('link-14', 'cam', 'link-8');">cam</a></tt><tt class="py-op">.</tt><tt class="py-name">imageRequestUnlock</tt><tt class="py-op">(</tt><tt class="py-name">nr</tt><tt class="py-op">)</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-15" class="py-name" targets="Class IMPACT.TimeoutError=IMPACT.TimeoutError-class.html"><a title="IMPACT.TimeoutError" class="py-name" href="#" onclick="return doclink('link-15', 'TimeoutError', 'link-15');">TimeoutError</a></tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">        <tt class="py-name">request</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="cam" class="py-name" href="#" onclick="return doclink('link-16', 'cam', 'link-8');">cam</a></tt><tt class="py-op">.</tt><tt class="py-name">getRequest</tt><tt class="py-op">(</tt><tt class="py-name">nr</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name"><a title="cam" class="py-name" href="#" onclick="return doclink('link-17', 'cam', 'link-8');">cam</a></tt><tt class="py-op">.</tt><tt class="py-name">isRequestOK</tt><tt class="py-op">(</tt><tt class="py-name">request</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">            <tt class="py-keyword">print</tt> <tt class="py-string">"Error in acquired image, possibly timeout"</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">            <tt class="py-name">reason</tt> <tt class="py-op">=</tt> <tt class="py-name">request</tt><tt class="py-op">.</tt><tt class="py-name">requestResult</tt><tt class="py-op">.</tt><tt class="py-name">readS</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">            <tt class="py-name">reasonid</tt> <tt class="py-op">=</tt> <tt class="py-name">request</tt><tt class="py-op">.</tt><tt class="py-name">requestResult</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Function readsis.read()=readsis-module.html#read"><a title="readsis.read" class="py-name" href="#" onclick="return doclink('link-18', 'read', 'link-18');">read</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">reason</tt> <tt class="py-op">==</tt> <tt class="py-string">'Timeout'</tt><tt class="py-op">:</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="cam" class="py-name" href="#" onclick="return doclink('link-19', 'cam', 'link-8');">cam</a></tt><tt class="py-op">.</tt><tt class="py-name">imageRequestUnlock</tt><tt class="py-op">(</tt><tt class="py-name">nr</tt><tt class="py-op">)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt id="link-20" class="py-name"><a title="IMPACT.TimeoutError" class="py-name" href="#" onclick="return doclink('link-20', 'TimeoutError', 'link-15');">TimeoutError</a></tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="cam" class="py-name" href="#" onclick="return doclink('link-21', 'cam', 'link-8');">cam</a></tt><tt class="py-op">.</tt><tt class="py-name">imageRequestUnlock</tt><tt class="py-op">(</tt><tt class="py-name">nr</tt><tt class="py-op">)</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-string">'Error acquiring image #%d: %s'</tt><tt class="py-op">%</tt><tt class="py-op">(</tt><tt class="py-name">reasonid</tt><tt class="py-op">,</tt> <tt class="py-name">reason</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt class="py-name">imgbuf</tt> <tt class="py-op">=</tt> <tt class="py-name">request</tt><tt class="py-op">.</tt><tt class="py-name">getImageBuffer</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">        <tt class="py-name">cbuf</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">c_char</tt><tt class="py-op">*</tt><tt class="py-op">(</tt><tt class="py-name">imgbuf</tt><tt class="py-op">.</tt><tt class="py-name">iSize</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">from_address</tt><tt class="py-op">(</tt><tt class="py-name">long</tt><tt class="py-op">(</tt><tt class="py-name">imgbuf</tt><tt class="py-op">.</tt><tt class="py-name">vpData</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">        <tt class="py-name">img</tt> <tt class="py-op">=</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">fromstring</tt><tt class="py-op">(</tt><tt class="py-name">cbuf</tt><tt class="py-op">,</tt> <tt class="py-name">dtype</tt> <tt class="py-op">=</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">uint8</tt><tt class="py-op">)</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">        <tt class="py-name">img</tt><tt class="py-op">.</tt><tt class="py-name">shape</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">imgbuf</tt><tt class="py-op">.</tt><tt class="py-name">iHeight</tt><tt class="py-op">,</tt> <tt class="py-name">imgbuf</tt><tt class="py-op">.</tt><tt class="py-name">iWidth</tt><tt class="py-op">)</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_data</tt> <tt class="py-op">=</tt> <tt class="py-name">img</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="cam" class="py-name" href="#" onclick="return doclink('link-22', 'cam', 'link-8');">cam</a></tt><tt class="py-op">.</tt><tt class="py-name">imageRequestUnlock</tt><tt class="py-op">(</tt><tt class="py-name">nr</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Cam.data"></a><div id="Cam.data-def"><a name="L94"></a><tt class="py-lineno"> 94</tt> <a class="py-toggle" href="#" id="Cam.data-toggle" onclick="return toggle('Cam.data');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="IMPACT.Cam-class.html#data">data</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cam.data-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Cam.data-expanded"><a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_data</tt> </tt>
+</div><a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"> </tt>
+<a name="Cam.set_timing"></a><div id="Cam.set_timing-def"><a name="L97"></a><tt class="py-lineno"> 97</tt> <a class="py-toggle" href="#" id="Cam.set_timing-toggle" onclick="return toggle('Cam.set_timing');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="IMPACT.Cam-class.html#set_timing">set_timing</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">integration</tt> <tt class="py-op">=</tt> <tt class="py-number">20</tt><tt class="py-op">,</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">                   <tt class="py-param">repetition</tt> <tt class="py-op">=</tt> <tt class="py-number">1000</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cam.set_timing-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Cam.set_timing-expanded"><a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">        <tt class="py-name">p</tt> <tt class="py-op">=</tt> <tt class="py-name">MV</tt><tt class="py-op">.</tt><tt class="py-name">CameraSettingsBlueFOX</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">device</tt><tt class="py-op">)</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">integration</tt> <tt class="py-op">==</tt> <tt class="py-number">0</tt> <tt class="py-keyword">and</tt> <tt id="link-23" class="py-name" targets="Variable acquire.CamTiming.repetition=acquire.CamTiming-class.html#repetition"><a title="acquire.CamTiming.repetition" class="py-name" href="#" onclick="return doclink('link-23', 'repetition', 'link-23');">repetition</a></tt> <tt class="py-op">==</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">            <tt class="py-name">p</tt><tt class="py-op">.</tt><tt class="py-name">triggerMode</tt><tt class="py-op">.</tt><tt class="py-name">writeS</tt><tt class="py-op">(</tt><tt class="py-string">'OnHighExpose'</tt><tt class="py-op">)</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">            <tt class="py-name">p</tt><tt class="py-op">.</tt><tt class="py-name">expose_us</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">integration</tt><tt class="py-op">*</tt><tt class="py-number">1000</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">'__main__'</tt><tt class="py-op">:</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">    <tt id="link-24" class="py-name"><a title="cam" class="py-name" href="#" onclick="return doclink('link-24', 'cam', 'link-8');">cam</a></tt> <tt class="py-op">=</tt> <tt id="link-25" class="py-name" targets="Class IMPACT.Cam=IMPACT.Cam-class.html,Class SIS.Cam=SIS.Cam-class.html"><a title="IMPACT.Cam
+SIS.Cam" class="py-name" href="#" onclick="return doclink('link-25', 'Cam', 'link-25');">Cam</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">    <tt id="link-26" class="py-name"><a title="cam" class="py-name" href="#" onclick="return doclink('link-26', 'cam', 'link-8');">cam</a></tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="IMPACT.Cam.open
+SIS.Cam.open
+SIS.PseudoCam.open" class="py-name" href="#" onclick="return doclink('link-27', 'open', 'link-7');">open</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">    <tt id="link-28" class="py-name"><a title="cam" class="py-name" href="#" onclick="return doclink('link-28', 'cam', 'link-8');">cam</a></tt><tt class="py-op">.</tt><tt id="link-29" class="py-name" targets="Method IMPACT.Cam.wait()=IMPACT.Cam-class.html#wait,Method SIS.Cam.wait()=SIS.Cam-class.html#wait,Method SIS.PseudoCam.wait()=SIS.PseudoCam-class.html#wait"><a title="IMPACT.Cam.wait
+SIS.Cam.wait
+SIS.PseudoCam.wait" class="py-name" href="#" onclick="return doclink('link-29', 'wait', 'link-29');">wait</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">    <tt class="py-name">img</tt> <tt class="py-op">=</tt> <tt id="link-30" class="py-name"><a title="cam" class="py-name" href="#" onclick="return doclink('link-30', 'cam', 'link-8');">cam</a></tt><tt class="py-op">.</tt><tt id="link-31" class="py-name" targets="Variable IMPACT.Cam.data=IMPACT.Cam-class.html#data,Variable SIS.Cam.data=SIS.Cam-class.html#data,Variable SIS.PseudoCam.data=SIS.PseudoCam-class.html#data"><a title="IMPACT.Cam.data
+SIS.Cam.data
+SIS.PseudoCam.data" class="py-name" href="#" onclick="return doclink('link-31', 'data', 'link-31');">data</a></tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">    <tt id="link-32" class="py-name"><a title="cam" class="py-name" href="#" onclick="return doclink('link-32', 'cam', 'link-8');">cam</a></tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="IMPACT.Cam.close
+SIS.Cam.close
+SIS.PseudoCam.close" class="py-name" href="#" onclick="return doclink('link-33', 'close', 'link-10');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >siscam</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Mar 12 18:29:30 2009
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

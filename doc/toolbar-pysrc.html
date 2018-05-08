@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>toolbar</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >siscam</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Module&nbsp;toolbar
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="toolbar-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="toolbar-module.html">Module toolbar</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#-*- coding: latin-1 -*-</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-docstring">"""Improved implementation of NavigationToolbar for matplotlib."""</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">wx</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">matplotlib</tt><tt class="py-op">.</tt><tt class="py-name">backend_bases</tt> <tt class="py-keyword">import</tt> <tt class="py-name">NavigationToolbar2</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">matplotlib</tt><tt class="py-op">.</tt><tt class="py-name">backends</tt><tt class="py-op">.</tt><tt class="py-name">backend_wx</tt> <tt class="py-keyword">import</tt> <tt class="py-name">FigureManager</tt><tt class="py-op">,</tt> <tt class="py-name">FigureCanvasWx</tt><tt class="py-op">,</tt> <tt class="py-name">SubplotTool</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">matplotlib</tt><tt class="py-op">.</tt><tt class="py-name">figure</tt> <tt class="py-keyword">import</tt> <tt class="py-name">Figure</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">matplotlib</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Variable toolbar.rcParams=toolbar-module.html#rcParams"><a title="toolbar.rcParams" class="py-name" href="#" onclick="return doclink('link-0', 'rcParams', 'link-0');">rcParams</a></tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">matplotlib</tt><tt class="py-op">.</tt><tt class="py-name">backends</tt><tt class="py-op">.</tt><tt class="py-name">backend_wx</tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Variable toolbar.cursord=toolbar-module.html#cursord"><a title="toolbar.cursord" class="py-name" href="#" onclick="return doclink('link-1', 'cursord', 'link-1');">cursord</a></tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"> </tt>
+<a name="_load_bitmap"></a><div id="_load_bitmap-def"><a name="L14"></a><tt class="py-lineno"> 14</tt> <a class="py-toggle" href="#" id="_load_bitmap-toggle" onclick="return toggle('_load_bitmap');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="toolbar-module.html#_load_bitmap">_load_bitmap</a><tt class="py-op">(</tt><tt class="py-param">filename</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_load_bitmap-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_load_bitmap-expanded"><a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-docstring">    Load a bitmap file from the backends/images subdirectory in which the</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-docstring">    matplotlib library is installed. The filename parameter should not</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-docstring">    contain any path information as this is determined automatically.</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring">    Returns a wx.Bitmap object</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">    <tt class="py-name">basedir</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Variable ImageTree.DirListEntry.path=ImageTree.DirListEntry-class.html#path"><a title="ImageTree.DirListEntry.path" class="py-name" href="#" onclick="return doclink('link-2', 'path', 'link-2');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt id="link-3" class="py-name"><a title="toolbar.rcParams" class="py-name" href="#" onclick="return doclink('link-3', 'rcParams', 'link-0');">rcParams</a></tt><tt class="py-op">[</tt><tt class="py-string">'datapath'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt><tt class="py-string">'images'</tt><tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">    <tt class="py-name">bmpFilename</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name"><a title="ImageTree.DirListEntry.path" class="py-name" href="#" onclick="return doclink('link-4', 'path', 'link-2');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">normpath</tt><tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name"><a title="ImageTree.DirListEntry.path" class="py-name" href="#" onclick="return doclink('link-5', 'path', 'link-2');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">basedir</tt><tt class="py-op">,</tt> <tt class="py-name">filename</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="ImageTree.DirListEntry.path" class="py-name" href="#" onclick="return doclink('link-6', 'path', 'link-2');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">exists</tt><tt class="py-op">(</tt><tt class="py-name">bmpFilename</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">IOError</tt><tt class="py-op">(</tt><tt class="py-string">'Could not find bitmap file "%s"; dying'</tt><tt class="py-op">%</tt><tt class="py-name">bmpFilename</tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">    <tt class="py-name">bmp</tt> <tt class="py-op">=</tt><tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">Bitmap</tt><tt class="py-op">(</tt><tt class="py-name">bmpFilename</tt><tt class="py-op">,</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">BITMAP_TYPE_PNG</tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">bmp</tt> </tt>
+</div><a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"> </tt>
+<a name="error_msg_wx"></a><div id="error_msg_wx-def"><a name="L32"></a><tt class="py-lineno"> 32</tt> <a class="py-toggle" href="#" id="error_msg_wx-toggle" onclick="return toggle('error_msg_wx');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="toolbar-module.html#error_msg_wx">error_msg_wx</a><tt class="py-op">(</tt><tt class="py-param">msg</tt><tt class="py-op">,</tt> <tt class="py-param">parent</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="error_msg_wx-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="error_msg_wx-expanded"><a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-docstring">    Signal an error condition -- in a GUI, popup a error dialog</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">    <tt class="py-name">dialog</tt> <tt class="py-op">=</tt><tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">MessageDialog</tt><tt class="py-op">(</tt><tt class="py-name">parent</tt> <tt class="py-op">=</tt> <tt class="py-name">parent</tt><tt class="py-op">,</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">                             <tt id="link-7" class="py-name" targets="Method acquire.ConsumerThread.message()=acquire.ConsumerThread-class.html#message"><a title="acquire.ConsumerThread.message" class="py-name" href="#" onclick="return doclink('link-7', 'message', 'link-7');">message</a></tt> <tt class="py-op">=</tt> <tt class="py-name">msg</tt><tt class="py-op">,</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">                             <tt class="py-name">caption</tt> <tt class="py-op">=</tt> <tt class="py-string">'Matplotlib backend_wx error'</tt><tt class="py-op">,</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">                             <tt class="py-name">style</tt><tt class="py-op">=</tt><tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">OK</tt> <tt class="py-op">|</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">CENTRE</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">    <tt class="py-name">dialog</tt><tt class="py-op">.</tt><tt class="py-name">ShowModal</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">    <tt class="py-name">dialog</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Method gridtypes.BoolEditor.Destroy()=gridtypes.BoolEditor-class.html#Destroy"><a title="gridtypes.BoolEditor.Destroy" class="py-name" href="#" onclick="return doclink('link-8', 'Destroy', 'link-8');">Destroy</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">None</tt>  </tt>
+</div><a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"> </tt>
+<a name="NavigationToolbar2Wx"></a><div id="NavigationToolbar2Wx-def"><a name="L44"></a><tt class="py-lineno"> 44</tt> <a class="py-toggle" href="#" id="NavigationToolbar2Wx-toggle" onclick="return toggle('NavigationToolbar2Wx');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="toolbar.NavigationToolbar2Wx-class.html">NavigationToolbar2Wx</a><tt class="py-op">(</tt><tt class="py-base-class">NavigationToolbar2</tt><tt class="py-op">,</tt> <tt class="py-base-class">wx</tt><tt class="py-op">.</tt><tt class="py-base-class">ToolBar</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NavigationToolbar2Wx-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="NavigationToolbar2Wx-expanded"><a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"> </tt>
+<a name="NavigationToolbar2Wx.__init__"></a><div id="NavigationToolbar2Wx.__init__-def"><a name="L46"></a><tt class="py-lineno"> 46</tt> <a class="py-toggle" href="#" id="NavigationToolbar2Wx.__init__-toggle" onclick="return toggle('NavigationToolbar2Wx.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="toolbar.NavigationToolbar2Wx-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">canvas</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NavigationToolbar2Wx.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="NavigationToolbar2Wx.__init__-expanded"><a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">        <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">ToolBar</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method DataPanel.DataPlotPanel.__init__()=DataPanel.DataPlotPanel-class.html#__init__,Method FitResultTableGrid.DynamicExpressionDialog.__init__()=FitResultTableGrid.DynamicExpressionDialog-class.html#__init__,Method FitResultTableGrid.FitResultDataTable.__init__()=FitResultTableGrid.FitResultDataTable-class.html#__init__,Method FitResultTableGrid.FitResultDataTableGrid.__init__()=FitResultTableGrid.FitResultDataTableGrid-class.html#__init__,Method FitResultTableGrid.GridPanel.__init__()=FitResultTableGrid.GridPanel-class.html#__init__,Method FitResultTableGrid.TabbedGridPanel.__init__()=FitResultTableGrid.TabbedGridPanel-class.html#__init__,Method FitResultTableGrid.TestFrame.__init__()=FitResultTableGrid.TestFrame-class.html#__init__,Method FitResultTableGrid.TestFrameNotebook.__init__()=FitResultTableGrid.TestFrameNotebook-class.html#__init__,Method IMPACT.Cam.__init__()=IMPACT.Cam-class.html#__init__,Method IMPACT.TimeoutError.__init__()=IMPACT.TimeoutError-class.html#__init__,Method ImagePanel.BitmapDisplay.__init__()=ImagePanel.BitmapDisplay-class.html#__init__,Method ImagePanel.BitmapDisplayOverlay.__init__()=ImagePanel.BitmapDisplayOverlay-class.html#__init__,Method ImagePanel.CamImageDisplay.__init__()=ImagePanel.CamImageDisplay-class.html#__init__,Method ImagePanel.CamImageMarkersPanel.__init__()=ImagePanel.CamImageMarkersPanel-class.html#__init__,Method ImagePanel.CamImagePanel.__init__()=ImagePanel.CamImagePanel-class.html#__init__,Method ImagePanel.CrossMarker.__init__()=ImagePanel.CrossMarker-class.html#__init__,Method ImagePanel.ImageDisplay.__init__()=ImagePanel.ImageDisplay-class.html#__init__,Method ImagePanel.ImageDisplayWithMarkersOverlayed.__init__()=ImagePanel.ImageDisplayWithMarkersOverlayed-class.html#__init__,Method ImagePanel.ImagePanel.__init__()=ImagePanel.ImagePanel-class.html#__init__,Method ImagePanel.Marker.__init__()=ImagePanel.Marker-class.html#__init__,Method ImagePanel.Point.__init__()=ImagePanel.Point-class.html#__init__,Method ImagePanel.RectMarker.__init__()=ImagePanel.RectMarker-class.html#__init__,Method ImagePanel.ZoomToolbar.__init__()=ImagePanel.ZoomToolbar-class.html#__init__,Method ImageTree.DirListEntry.__init__()=ImageTree.DirListEntry-class.html#__init__,Method ImageTree.ImageTree.__init__()=ImageTree.ImageTree-class.html#__init__,Method ImageTree.ImageTreePanel.__init__()=ImageTree.ImageTreePanel-class.html#__init__,Method ImageTree.LabeledList.__init__()=ImageTree.LabeledList-class.html#__init__,Method ImageTree.TreeModel.__init__()=ImageTree.TreeModel-class.html#__init__,Method ImageTree.TreeModelSync.__init__()=ImageTree.TreeModelSync-class.html#__init__,Method SIS.Cam.__init__()=SIS.Cam-class.html#__init__,Method SIS.PseudoCam.__init__()=SIS.PseudoCam-class.html#__init__,Method SISlib.Singleton.__init__()=SISlib.Singleton-class.html#__init__,Method SISlib.SisLibrary.__init__()=SISlib.SisLibrary-class.html#__init__,Method SISlib.SislibError.__init__()=SISlib.SislibError-class.html#__init__,Method SISlib.SislibTimeoutError.__init__()=SISlib.SislibTimeoutError-class.html#__init__,Method acquire.AcquireSplashScreen.__init__()=acquire.AcquireSplashScreen-class.html#__init__,Method acquire.AcquireThread.__init__()=acquire.AcquireThread-class.html#__init__,Method acquire.AcquireThreadSony.__init__()=acquire.AcquireThreadSony-class.html#__init__,Method acquire.CamTiming.__init__()=acquire.CamTiming-class.html#__init__,Method acquire.ConsumerThread.__init__()=acquire.ConsumerThread-class.html#__init__,Method acquire.TimingDialog.__init__()=acquire.TimingDialog-class.html#__init__,Method cam.CamCursor.__init__()=cam.CamCursor-class.html#__init__,Method cam.CamSplashScreen.__init__()=cam.CamSplashScreen-class.html#__init__,Method cam.ImgPanel.__init__()=cam.ImgPanel-class.html#__init__,Method cam.Selector.__init__()=cam.Selector-class.html#__init__,Method cam.XSelector.__init__()=cam.XSelector-class.html#__init__,Method cam.XYSelector.__init__()=cam.XYSelector-class.html#__init__,Method cam.YSelector.__init__()=cam.YSelector-class.html#__init__,Method ding.Ding.__init__()=ding.Ding-class.html#__init__,Method fitting.Bimodal2d.__init__()=fitting.Bimodal2d-class.html#__init__,Method fitting.BoseBimodal2d.__init__()=fitting.BoseBimodal2d-class.html#__init__,Method fitting.FitParsBimodal2d.__init__()=fitting.FitParsBimodal2d-class.html#__init__,Method fitting.FitParsGauss2d.__init__()=fitting.FitParsGauss2d-class.html#__init__,Method fitting.FitParsNoFit.__init__()=fitting.FitParsNoFit-class.html#__init__,Method fitting.FitParsTF2d.__init__()=fitting.FitParsTF2d-class.html#__init__,Method fitting.Gauss2d.__init__()=fitting.Gauss2d-class.html#__init__,Method fitting.GaussSym2d.__init__()=fitting.GaussSym2d-class.html#__init__,Method fitting.NoFit.__init__()=fitting.NoFit-class.html#__init__,Method gridtypes.BoolEditor.__init__()=gridtypes.BoolEditor-class.html#__init__,Method gridtypes.BoolRenderer.__init__()=gridtypes.BoolRenderer-class.html#__init__,Method gridtypes.FloatRenderer.__init__()=gridtypes.FloatRenderer-class.html#__init__,Method roi.ROI.__init__()=roi.ROI-class.html#__init__,Method toolbar.NavigationToolbar2Wx.__init__()=toolbar.NavigationToolbar2Wx-class.html#__init__"><a title="DataPanel.DataPlotPanel.__init__
+FitResultTableGrid.DynamicExpressionDialog.__init__
+FitResultTableGrid.FitResultDataTable.__init__
+FitResultTableGrid.FitResultDataTableGrid.__init__
+FitResultTableGrid.GridPanel.__init__
+FitResultTableGrid.TabbedGridPanel.__init__
+FitResultTableGrid.TestFrame.__init__
+FitResultTableGrid.TestFrameNotebook.__init__
+IMPACT.Cam.__init__
+IMPACT.TimeoutError.__init__
+ImagePanel.BitmapDisplay.__init__
+ImagePanel.BitmapDisplayOverlay.__init__
+ImagePanel.CamImageDisplay.__init__
+ImagePanel.CamImageMarkersPanel.__init__
+ImagePanel.CamImagePanel.__init__
+ImagePanel.CrossMarker.__init__
+ImagePanel.ImageDisplay.__init__
+ImagePanel.ImageDisplayWithMarkersOverlayed.__init__
+ImagePanel.ImagePanel.__init__
+ImagePanel.Marker.__init__
+ImagePanel.Point.__init__
+ImagePanel.RectMarker.__init__
+ImagePanel.ZoomToolbar.__init__
+ImageTree.DirListEntry.__init__
+ImageTree.ImageTree.__init__
+ImageTree.ImageTreePanel.__init__
+ImageTree.LabeledList.__init__
+ImageTree.TreeModel.__init__
+ImageTree.TreeModelSync.__init__
+SIS.Cam.__init__
+SIS.PseudoCam.__init__
+SISlib.Singleton.__init__
+SISlib.SisLibrary.__init__
+SISlib.SislibError.__init__
+SISlib.SislibTimeoutError.__init__
+acquire.AcquireSplashScreen.__init__
+acquire.AcquireThread.__init__
+acquire.AcquireThreadSony.__init__
+acquire.CamTiming.__init__
+acquire.ConsumerThread.__init__
+acquire.TimingDialog.__init__
+cam.CamCursor.__init__
+cam.CamSplashScreen.__init__
+cam.ImgPanel.__init__
+cam.Selector.__init__
+cam.XSelector.__init__
+cam.XYSelector.__init__
+cam.YSelector.__init__
+ding.Ding.__init__
+fitting.Bimodal2d.__init__
+fitting.BoseBimodal2d.__init__
+fitting.FitParsBimodal2d.__init__
+fitting.FitParsGauss2d.__init__
+fitting.FitParsNoFit.__init__
+fitting.FitParsTF2d.__init__
+fitting.Gauss2d.__init__
+fitting.GaussSym2d.__init__
+fitting.NoFit.__init__
+gridtypes.BoolEditor.__init__
+gridtypes.BoolRenderer.__init__
+gridtypes.FloatRenderer.__init__
+roi.ROI.__init__
+toolbar.NavigationToolbar2Wx.__init__" class="py-name" href="#" onclick="return doclink('link-9', '__init__', 'link-9');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">canvas</tt><tt class="py-op">.</tt><tt class="py-name">GetParent</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">        <tt class="py-name">NavigationToolbar2</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="DataPanel.DataPlotPanel.__init__
+FitResultTableGrid.DynamicExpressionDialog.__init__
+FitResultTableGrid.FitResultDataTable.__init__
+FitResultTableGrid.FitResultDataTableGrid.__init__
+FitResultTableGrid.GridPanel.__init__
+FitResultTableGrid.TabbedGridPanel.__init__
+FitResultTableGrid.TestFrame.__init__
+FitResultTableGrid.TestFrameNotebook.__init__
+IMPACT.Cam.__init__
+IMPACT.TimeoutError.__init__
+ImagePanel.BitmapDisplay.__init__
+ImagePanel.BitmapDisplayOverlay.__init__
+ImagePanel.CamImageDisplay.__init__
+ImagePanel.CamImageMarkersPanel.__init__
+ImagePanel.CamImagePanel.__init__
+ImagePanel.CrossMarker.__init__
+ImagePanel.ImageDisplay.__init__
+ImagePanel.ImageDisplayWithMarkersOverlayed.__init__
+ImagePanel.ImagePanel.__init__
+ImagePanel.Marker.__init__
+ImagePanel.Point.__init__
+ImagePanel.RectMarker.__init__
+ImagePanel.ZoomToolbar.__init__
+ImageTree.DirListEntry.__init__
+ImageTree.ImageTree.__init__
+ImageTree.ImageTreePanel.__init__
+ImageTree.LabeledList.__init__
+ImageTree.TreeModel.__init__
+ImageTree.TreeModelSync.__init__
+SIS.Cam.__init__
+SIS.PseudoCam.__init__
+SISlib.Singleton.__init__
+SISlib.SisLibrary.__init__
+SISlib.SislibError.__init__
+SISlib.SislibTimeoutError.__init__
+acquire.AcquireSplashScreen.__init__
+acquire.AcquireThread.__init__
+acquire.AcquireThreadSony.__init__
+acquire.CamTiming.__init__
+acquire.ConsumerThread.__init__
+acquire.TimingDialog.__init__
+cam.CamCursor.__init__
+cam.CamSplashScreen.__init__
+cam.ImgPanel.__init__
+cam.Selector.__init__
+cam.XSelector.__init__
+cam.XYSelector.__init__
+cam.YSelector.__init__
+ding.Ding.__init__
+fitting.Bimodal2d.__init__
+fitting.BoseBimodal2d.__init__
+fitting.FitParsBimodal2d.__init__
+fitting.FitParsGauss2d.__init__
+fitting.FitParsNoFit.__init__
+fitting.FitParsTF2d.__init__
+fitting.Gauss2d.__init__
+fitting.GaussSym2d.__init__
+fitting.NoFit.__init__
+gridtypes.BoolEditor.__init__
+gridtypes.BoolRenderer.__init__
+gridtypes.FloatRenderer.__init__
+roi.ROI.__init__
+toolbar.NavigationToolbar2Wx.__init__" class="py-name" href="#" onclick="return doclink('link-10', '__init__', 'link-9');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">canvas</tt><tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">canvas</tt> <tt class="py-op">=</tt> <tt class="py-name">canvas</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_idle</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">statbar</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"> </tt>
+<a name="NavigationToolbar2Wx.get_canvas"></a><div id="NavigationToolbar2Wx.get_canvas-def"><a name="L53"></a><tt class="py-lineno"> 53</tt> <a class="py-toggle" href="#" id="NavigationToolbar2Wx.get_canvas-toggle" onclick="return toggle('NavigationToolbar2Wx.get_canvas');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="toolbar.NavigationToolbar2Wx-class.html#get_canvas">get_canvas</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">frame</tt><tt class="py-op">,</tt> <tt class="py-param">fig</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NavigationToolbar2Wx.get_canvas-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="NavigationToolbar2Wx.get_canvas-expanded"><a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">FigureCanvasWx</tt><tt class="py-op">(</tt><tt class="py-name">frame</tt><tt class="py-op">,</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-name">fig</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"> </tt>
+<a name="NavigationToolbar2Wx._init_toolbar"></a><div id="NavigationToolbar2Wx._init_toolbar-def"><a name="L56"></a><tt class="py-lineno"> 56</tt> <a class="py-toggle" href="#" id="NavigationToolbar2Wx._init_toolbar-toggle" onclick="return toggle('NavigationToolbar2Wx._init_toolbar');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="toolbar.NavigationToolbar2Wx-class.html#_init_toolbar">_init_toolbar</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NavigationToolbar2Wx._init_toolbar-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="NavigationToolbar2Wx._init_toolbar-expanded"><a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_parent</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">canvas</tt><tt class="py-op">.</tt><tt class="py-name">GetParent</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_NTB2_HOME</tt>    <tt class="py-op">=</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">NewId</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_NTB2_BACK</tt>    <tt class="py-op">=</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">NewId</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_NTB2_FORWARD</tt> <tt class="py-op">=</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">NewId</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_NTB2_PAN</tt>     <tt class="py-op">=</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">NewId</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_NTB2_ZOOM</tt>    <tt class="py-op">=</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">NewId</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_NTB2_SAVE</tt>    <tt class="py-op">=</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">NewId</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_NTB2_SUBPLOT</tt> <tt class="py-op">=</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">NewId</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">SetToolBitmapSize</tt><tt class="py-op">(</tt><tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">Size</tt><tt class="py-op">(</tt><tt class="py-number">24</tt><tt class="py-op">,</tt><tt class="py-number">24</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">AddLabelTool</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_NTB2_HOME</tt><tt class="py-op">,</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">                          <tt class="py-string">'home'</tt><tt class="py-op">,</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">                          <tt id="link-11" class="py-name" targets="Function toolbar._load_bitmap()=toolbar-module.html#_load_bitmap"><a title="toolbar._load_bitmap" class="py-name" href="#" onclick="return doclink('link-11', '_load_bitmap', 'link-11');">_load_bitmap</a></tt><tt class="py-op">(</tt><tt class="py-string">'home.png'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">                          <tt class="py-name">shortHelp</tt> <tt class="py-op">=</tt> <tt class="py-string">'Home'</tt><tt class="py-op">,</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">                          <tt class="py-name">longHelp</tt> <tt class="py-op">=</tt> <tt class="py-string">'Reset original view'</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">AddLabelTool</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_NTB2_BACK</tt><tt class="py-op">,</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">                          <tt class="py-string">'back'</tt><tt class="py-op">,</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">                          <tt id="link-12" class="py-name"><a title="toolbar._load_bitmap" class="py-name" href="#" onclick="return doclink('link-12', '_load_bitmap', 'link-11');">_load_bitmap</a></tt><tt class="py-op">(</tt><tt class="py-string">'back.png'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">                          <tt class="py-name">shortHelp</tt> <tt class="py-op">=</tt> <tt class="py-string">'Back'</tt><tt class="py-op">,</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">                          <tt class="py-name">longHelp</tt> <tt class="py-op">=</tt> <tt class="py-string">'Back navigation view'</tt><tt class="py-op">)</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">AddLabelTool</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_NTB2_FORWARD</tt><tt class="py-op">,</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">                          <tt class="py-string">'forward'</tt><tt class="py-op">,</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">                          <tt id="link-13" class="py-name"><a title="toolbar._load_bitmap" class="py-name" href="#" onclick="return doclink('link-13', '_load_bitmap', 'link-11');">_load_bitmap</a></tt><tt class="py-op">(</tt><tt class="py-string">'forward.png'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">                          <tt class="py-name">shortHelp</tt> <tt class="py-op">=</tt> <tt class="py-string">'Forward'</tt><tt class="py-op">,</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">                          <tt class="py-name">longHelp</tt> <tt class="py-op">=</tt> <tt class="py-string">'Forward navigation view'</tt><tt class="py-op">)</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">AddCheckLabelTool</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_NTB2_PAN</tt><tt class="py-op">,</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">                          <tt class="py-string">'pan'</tt><tt class="py-op">,</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">                          <tt id="link-14" class="py-name"><a title="toolbar._load_bitmap" class="py-name" href="#" onclick="return doclink('link-14', '_load_bitmap', 'link-11');">_load_bitmap</a></tt><tt class="py-op">(</tt><tt class="py-string">'move.png'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">                          <tt class="py-name">shortHelp</tt><tt class="py-op">=</tt><tt class="py-string">'Pan'</tt><tt class="py-op">,</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">                          <tt class="py-name">longHelp</tt><tt class="py-op">=</tt><tt class="py-string">'Pan with left, zoom with right'</tt><tt class="py-op">)</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">AddCheckLabelTool</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_NTB2_ZOOM</tt><tt class="py-op">,</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">                          <tt class="py-string">'zoom'</tt><tt class="py-op">,</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">                          <tt id="link-15" class="py-name"><a title="toolbar._load_bitmap" class="py-name" href="#" onclick="return doclink('link-15', '_load_bitmap', 'link-11');">_load_bitmap</a></tt><tt class="py-op">(</tt><tt class="py-string">'zoom_to_rect.png'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">                          <tt class="py-name">shortHelp</tt><tt class="py-op">=</tt><tt class="py-string">'Zoom'</tt><tt class="py-op">,</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">                          <tt class="py-name">longHelp</tt><tt class="py-op">=</tt><tt class="py-string">'Zoom to rectangle'</tt><tt class="py-op">)</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">AddSeparator</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">AddLabelTool</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_NTB2_SUBPLOT</tt><tt class="py-op">,</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">                          <tt class="py-string">'configure'</tt><tt class="py-op">,</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">                          <tt id="link-16" class="py-name"><a title="toolbar._load_bitmap" class="py-name" href="#" onclick="return doclink('link-16', '_load_bitmap', 'link-11');">_load_bitmap</a></tt><tt class="py-op">(</tt><tt class="py-string">'subplots.png'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">                          <tt class="py-name">shortHelp</tt> <tt class="py-op">=</tt> <tt class="py-string">'Configure subplots'</tt><tt class="py-op">,</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">                          <tt class="py-name">longHelp</tt> <tt class="py-op">=</tt> <tt class="py-string">'Configure subplot parameters'</tt><tt class="py-op">)</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">AddLabelTool</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_NTB2_SAVE</tt><tt class="py-op">,</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">                          <tt class="py-string">'save'</tt><tt class="py-op">,</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">                          <tt id="link-17" class="py-name"><a title="toolbar._load_bitmap" class="py-name" href="#" onclick="return doclink('link-17', '_load_bitmap', 'link-11');">_load_bitmap</a></tt><tt class="py-op">(</tt><tt class="py-string">'filesave.png'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">                          <tt class="py-name">shortHelp</tt> <tt class="py-op">=</tt> <tt class="py-string">'Save'</tt><tt class="py-op">,</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">                          <tt class="py-name">longHelp</tt> <tt class="py-op">=</tt> <tt class="py-string">'Save plot contents to file'</tt><tt class="py-op">)</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">         </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">        <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">EVT_TOOL</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_NTB2_HOME</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">home</tt><tt class="py-op">)</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">        <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">EVT_TOOL</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_NTB2_FORWARD</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">forward</tt><tt class="py-op">)</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">        <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">EVT_TOOL</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_NTB2_BACK</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">back</tt><tt class="py-op">)</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">        <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">EVT_TOOL</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_NTB2_ZOOM</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Method toolbar.NavigationToolbar2Wx.zoom()=toolbar.NavigationToolbar2Wx-class.html#zoom"><a title="toolbar.NavigationToolbar2Wx.zoom" class="py-name" href="#" onclick="return doclink('link-18', 'zoom', 'link-18');">zoom</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">        <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">EVT_TOOL</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_NTB2_PAN</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name" targets="Method toolbar.NavigationToolbar2Wx.pan()=toolbar.NavigationToolbar2Wx-class.html#pan"><a title="toolbar.NavigationToolbar2Wx.pan" class="py-name" href="#" onclick="return doclink('link-19', 'pan', 'link-19');">pan</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">        <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">EVT_TOOL</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_NTB2_SUBPLOT</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Method toolbar.NavigationToolbar2Wx.configure_subplot()=toolbar.NavigationToolbar2Wx-class.html#configure_subplot"><a title="toolbar.NavigationToolbar2Wx.configure_subplot" class="py-name" href="#" onclick="return doclink('link-20', 'configure_subplot', 'link-20');">configure_subplot</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">        <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">EVT_TOOL</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_NTB2_SAVE</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Method toolbar.NavigationToolbar2Wx.save()=toolbar.NavigationToolbar2Wx-class.html#save"><a title="toolbar.NavigationToolbar2Wx.save" class="py-name" href="#" onclick="return doclink('link-21', 'save', 'link-21');">save</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">Realize</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"> </tt>
+<a name="NavigationToolbar2Wx.zoom"></a><div id="NavigationToolbar2Wx.zoom-def"><a name="L119"></a><tt class="py-lineno">119</tt> <a class="py-toggle" href="#" id="NavigationToolbar2Wx.zoom-toggle" onclick="return toggle('NavigationToolbar2Wx.zoom');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="toolbar.NavigationToolbar2Wx-class.html#zoom">zoom</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NavigationToolbar2Wx.zoom-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="NavigationToolbar2Wx.zoom-expanded"><a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ToggleTool</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_NTB2_PAN</tt><tt class="py-op">,</tt> <tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">        <tt class="py-name">NavigationToolbar2</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="toolbar.NavigationToolbar2Wx.zoom" class="py-name" href="#" onclick="return doclink('link-22', 'zoom', 'link-18');">zoom</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"> </tt>
+<a name="NavigationToolbar2Wx.pan"></a><div id="NavigationToolbar2Wx.pan-def"><a name="L123"></a><tt class="py-lineno">123</tt> <a class="py-toggle" href="#" id="NavigationToolbar2Wx.pan-toggle" onclick="return toggle('NavigationToolbar2Wx.pan');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="toolbar.NavigationToolbar2Wx-class.html#pan">pan</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NavigationToolbar2Wx.pan-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="NavigationToolbar2Wx.pan-expanded"><a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ToggleTool</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_NTB2_ZOOM</tt><tt class="py-op">,</tt> <tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">        <tt class="py-name">NavigationToolbar2</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="toolbar.NavigationToolbar2Wx.pan" class="py-name" href="#" onclick="return doclink('link-23', 'pan', 'link-19');">pan</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"> </tt>
+<a name="NavigationToolbar2Wx.configure_subplot"></a><div id="NavigationToolbar2Wx.configure_subplot-def"><a name="L127"></a><tt class="py-lineno">127</tt> <a class="py-toggle" href="#" id="NavigationToolbar2Wx.configure_subplot-toggle" onclick="return toggle('NavigationToolbar2Wx.configure_subplot');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="toolbar.NavigationToolbar2Wx-class.html#configure_subplot">configure_subplot</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">evt</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NavigationToolbar2Wx.configure_subplot-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="NavigationToolbar2Wx.configure_subplot-expanded"><a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">        <tt class="py-name">frame</tt> <tt class="py-op">=</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">Frame</tt><tt class="py-op">(</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-string">"Configure subplots"</tt><tt class="py-op">)</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">        <tt class="py-name">toolfig</tt> <tt class="py-op">=</tt> <tt class="py-name">Figure</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-number">6</tt><tt class="py-op">,</tt><tt class="py-number">3</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">        <tt class="py-name">canvas</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name" targets="Method toolbar.NavigationToolbar2Wx.get_canvas()=toolbar.NavigationToolbar2Wx-class.html#get_canvas"><a title="toolbar.NavigationToolbar2Wx.get_canvas" class="py-name" href="#" onclick="return doclink('link-24', 'get_canvas', 'link-24');">get_canvas</a></tt><tt class="py-op">(</tt><tt class="py-name">frame</tt><tt class="py-op">,</tt> <tt class="py-name">toolfig</tt><tt class="py-op">)</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">        <tt class="py-comment"># Create a figure manager to manage things</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-name">figmgr</tt> <tt class="py-op">=</tt> <tt class="py-name">FigureManager</tt><tt class="py-op">(</tt><tt class="py-name">canvas</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-name">frame</tt><tt class="py-op">)</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">        <tt class="py-comment"># Now put all into a sizer</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-name">sizer</tt> <tt class="py-op">=</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">BoxSizer</tt><tt class="py-op">(</tt><tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">VERTICAL</tt><tt class="py-op">)</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">        <tt class="py-comment"># This way of adding to sizer allows resizing</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-name">sizer</tt><tt class="py-op">.</tt><tt class="py-name">Add</tt><tt class="py-op">(</tt><tt class="py-name">canvas</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">LEFT</tt><tt class="py-op">|</tt><tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">TOP</tt><tt class="py-op">|</tt><tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">GROW</tt><tt class="py-op">)</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">        <tt class="py-name">frame</tt><tt class="py-op">.</tt><tt class="py-name">SetSizer</tt><tt class="py-op">(</tt><tt class="py-name">sizer</tt><tt class="py-op">)</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">        <tt class="py-name">frame</tt><tt class="py-op">.</tt><tt class="py-name">Fit</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">        <tt class="py-name">tool</tt> <tt class="py-op">=</tt> <tt class="py-name">SubplotTool</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">canvas</tt><tt class="py-op">.</tt><tt class="py-name">figure</tt><tt class="py-op">,</tt> <tt class="py-name">toolfig</tt><tt class="py-op">)</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">        <tt class="py-name">frame</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name" targets="Method gridtypes.BoolEditor.Show()=gridtypes.BoolEditor-class.html#Show"><a title="gridtypes.BoolEditor.Show" class="py-name" href="#" onclick="return doclink('link-25', 'Show', 'link-25');">Show</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"> </tt>
+<a name="NavigationToolbar2Wx.save"></a><div id="NavigationToolbar2Wx.save-def"><a name="L145"></a><tt class="py-lineno">145</tt> <a class="py-toggle" href="#" id="NavigationToolbar2Wx.save-toggle" onclick="return toggle('NavigationToolbar2Wx.save');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="toolbar.NavigationToolbar2Wx-class.html#save">save</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">evt</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NavigationToolbar2Wx.save-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="NavigationToolbar2Wx.save-expanded"><a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">        <tt class="py-comment"># Fetch the required filename and file type.</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-name">filetypes</tt><tt class="py-op">,</tt> <tt class="py-name">exts</tt><tt class="py-op">,</tt> <tt class="py-name">filter_index</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">canvas</tt><tt class="py-op">.</tt><tt class="py-name">_get_imagesave_wildcards</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">        <tt class="py-name">default_file</tt> <tt class="py-op">=</tt> <tt class="py-string">"image."</tt> <tt class="py-op">+</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">canvas</tt><tt class="py-op">.</tt><tt class="py-name">get_default_filetype</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">        <tt class="py-name">dlg</tt> <tt class="py-op">=</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">FileDialog</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_parent</tt><tt class="py-op">,</tt> <tt class="py-string">"Save to file"</tt><tt class="py-op">,</tt> <tt class="py-string">""</tt><tt class="py-op">,</tt> <tt class="py-name">default_file</tt><tt class="py-op">,</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">                            <tt class="py-name">filetypes</tt><tt class="py-op">,</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">                            <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">SAVE</tt><tt class="py-op">|</tt><tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">OVERWRITE_PROMPT</tt><tt class="py-op">|</tt><tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">CHANGE_DIR</tt><tt class="py-op">)</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">        <tt class="py-name">dlg</tt><tt class="py-op">.</tt><tt class="py-name">SetFilterIndex</tt><tt class="py-op">(</tt><tt class="py-name">filter_index</tt><tt class="py-op">)</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">dlg</tt><tt class="py-op">.</tt><tt class="py-name">ShowModal</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">ID_OK</tt><tt class="py-op">:</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">            <tt class="py-name">dirname</tt>  <tt class="py-op">=</tt> <tt class="py-name">dlg</tt><tt class="py-op">.</tt><tt class="py-name">GetDirectory</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">            <tt class="py-name">filename</tt> <tt class="py-op">=</tt> <tt class="py-name">dlg</tt><tt class="py-op">.</tt><tt class="py-name">GetFilename</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">            <tt id="link-26" class="py-name" targets="Variable gridtypes.FloatRenderer.format=gridtypes.FloatRenderer-class.html#format"><a title="gridtypes.FloatRenderer.format" class="py-name" href="#" onclick="return doclink('link-26', 'format', 'link-26');">format</a></tt> <tt class="py-op">=</tt> <tt class="py-name">exts</tt><tt class="py-op">[</tt><tt class="py-name">dlg</tt><tt class="py-op">.</tt><tt class="py-name">GetFilterIndex</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">             </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">            <tt class="py-comment">#Explicitly pass in the selected filetype to override the</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"><tt class="py-comment"></tt>            <tt class="py-comment"># actual extension if necessary</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line"><tt class="py-comment"></tt>            <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">canvas</tt><tt class="py-op">.</tt><tt class="py-name">print_figure</tt><tt class="py-op">(</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">                    <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="ImageTree.DirListEntry.path" class="py-name" href="#" onclick="return doclink('link-27', 'path', 'link-2');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">dirname</tt><tt class="py-op">,</tt> <tt class="py-name">filename</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-28" class="py-name"><a title="gridtypes.FloatRenderer.format" class="py-name" href="#" onclick="return doclink('link-28', 'format', 'link-26');">format</a></tt><tt class="py-op">=</tt><tt id="link-29" class="py-name"><a title="gridtypes.FloatRenderer.format" class="py-name" href="#" onclick="return doclink('link-29', 'format', 'link-26');">format</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">            <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt><tt class="py-op">,</tt> <tt class="py-name">e</tt><tt class="py-op">:</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">                <tt id="link-30" class="py-name" targets="Function toolbar.error_msg_wx()=toolbar-module.html#error_msg_wx"><a title="toolbar.error_msg_wx" class="py-name" href="#" onclick="return doclink('link-30', 'error_msg_wx', 'link-30');">error_msg_wx</a></tt><tt class="py-op">(</tt><tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">e</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">             </tt>
+<a name="NavigationToolbar2Wx.set_cursor"></a><div id="NavigationToolbar2Wx.set_cursor-def"><a name="L166"></a><tt class="py-lineno">166</tt> <a class="py-toggle" href="#" id="NavigationToolbar2Wx.set_cursor-toggle" onclick="return toggle('NavigationToolbar2Wx.set_cursor');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="toolbar.NavigationToolbar2Wx-class.html#set_cursor">set_cursor</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">cursor</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NavigationToolbar2Wx.set_cursor-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="NavigationToolbar2Wx.set_cursor-expanded"><a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">        <tt class="py-name">cursor</tt> <tt class="py-op">=</tt><tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">StockCursor</tt><tt class="py-op">(</tt><tt id="link-31" class="py-name"><a title="toolbar.cursord" class="py-name" href="#" onclick="return doclink('link-31', 'cursord', 'link-1');">cursord</a></tt><tt class="py-op">[</tt><tt class="py-name">cursor</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">canvas</tt><tt class="py-op">.</tt><tt class="py-name">SetCursor</tt><tt class="py-op">(</tt> <tt class="py-name">cursor</tt> <tt class="py-op">)</tt> </tt>
+</div><a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line"> </tt>
+<a name="NavigationToolbar2Wx.release"></a><div id="NavigationToolbar2Wx.release-def"><a name="L170"></a><tt class="py-lineno">170</tt> <a class="py-toggle" href="#" id="NavigationToolbar2Wx.release-toggle" onclick="return toggle('NavigationToolbar2Wx.release');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="toolbar.NavigationToolbar2Wx-class.html#release">release</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">event</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NavigationToolbar2Wx.release-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="NavigationToolbar2Wx.release-expanded"><a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> <tt class="py-keyword">del</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lastrect</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">AttributeError</tt><tt class="py-op">:</tt> <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line"> </tt>
+<a name="NavigationToolbar2Wx.dynamic_update"></a><div id="NavigationToolbar2Wx.dynamic_update-def"><a name="L174"></a><tt class="py-lineno">174</tt> <a class="py-toggle" href="#" id="NavigationToolbar2Wx.dynamic_update-toggle" onclick="return toggle('NavigationToolbar2Wx.dynamic_update');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="toolbar.NavigationToolbar2Wx-class.html#dynamic_update">dynamic_update</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NavigationToolbar2Wx.dynamic_update-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="NavigationToolbar2Wx.dynamic_update-expanded"><a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line">        <tt class="py-name">d</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_idle</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_idle</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">d</tt><tt class="py-op">:</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">canvas</tt><tt class="py-op">.</tt><tt id="link-32" class="py-name" targets="Method DataPanel.DataPlotPanel.draw()=DataPanel.DataPlotPanel-class.html#draw,Method ImagePanel.CrossMarker.draw()=ImagePanel.CrossMarker-class.html#draw,Method ImagePanel.ImageDisplay.draw()=ImagePanel.ImageDisplay-class.html#draw,Method ImagePanel.RectMarker.draw()=ImagePanel.RectMarker-class.html#draw"><a title="DataPanel.DataPlotPanel.draw
+ImagePanel.CrossMarker.draw
+ImagePanel.ImageDisplay.draw
+ImagePanel.RectMarker.draw" class="py-name" href="#" onclick="return doclink('link-32', 'draw', 'link-32');">draw</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_idle</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+</div><a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line"> </tt>
+<a name="NavigationToolbar2Wx.draw_rubberband"></a><div id="NavigationToolbar2Wx.draw_rubberband-def"><a name="L181"></a><tt class="py-lineno">181</tt> <a class="py-toggle" href="#" id="NavigationToolbar2Wx.draw_rubberband-toggle" onclick="return toggle('NavigationToolbar2Wx.draw_rubberband');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="toolbar.NavigationToolbar2Wx-class.html#draw_rubberband">draw_rubberband</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">event</tt><tt class="py-op">,</tt> <tt class="py-param">x0</tt><tt class="py-op">,</tt> <tt class="py-param">y0</tt><tt class="py-op">,</tt> <tt class="py-param">x1</tt><tt class="py-op">,</tt> <tt class="py-param">y1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NavigationToolbar2Wx.draw_rubberband-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="NavigationToolbar2Wx.draw_rubberband-expanded"><a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">        <tt class="py-docstring">'adapted from http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/189744'</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line">        <tt class="py-name">canvas</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">canvas</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">        <tt class="py-name">dc</tt> <tt class="py-op">=</tt><tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">ClientDC</tt><tt class="py-op">(</tt><tt class="py-name">canvas</tt><tt class="py-op">)</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line"> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line">        <tt class="py-comment"># Set logical function to XOR for rubberbanding</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-name">dc</tt><tt class="py-op">.</tt><tt class="py-name">SetLogicalFunction</tt><tt class="py-op">(</tt><tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">XOR</tt><tt class="py-op">)</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line"> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line">        <tt class="py-comment"># Set dc brush and pen</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-comment"># Here I set brush and pen to white and grey respectively</tt> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-comment"># You can set it to your own choices</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line"><tt class="py-comment"></tt> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line">        <tt class="py-comment"># The brush setting is not really needed since we</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-comment"># dont do any filling of the dc. It is set just for</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-comment"># the sake of completion.</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line"><tt class="py-comment"></tt> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line">        <tt class="py-name">wbrush</tt> <tt class="py-op">=</tt><tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">Brush</tt><tt class="py-op">(</tt><tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">Colour</tt><tt class="py-op">(</tt><tt class="py-number">255</tt><tt class="py-op">,</tt><tt class="py-number">255</tt><tt class="py-op">,</tt><tt class="py-number">255</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">TRANSPARENT</tt><tt class="py-op">)</tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line">        <tt class="py-name">wpen</tt> <tt class="py-op">=</tt><tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">Pen</tt><tt class="py-op">(</tt><tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">Colour</tt><tt class="py-op">(</tt><tt class="py-number">200</tt><tt class="py-op">,</tt> <tt class="py-number">200</tt><tt class="py-op">,</tt> <tt class="py-number">200</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">SOLID</tt><tt class="py-op">)</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line">        <tt class="py-name">dc</tt><tt class="py-op">.</tt><tt class="py-name">SetBrush</tt><tt class="py-op">(</tt><tt class="py-name">wbrush</tt><tt class="py-op">)</tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line">        <tt class="py-name">dc</tt><tt class="py-op">.</tt><tt class="py-name">SetPen</tt><tt class="py-op">(</tt><tt class="py-name">wpen</tt><tt class="py-op">)</tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line"> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line"> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line">        <tt class="py-name">dc</tt><tt class="py-op">.</tt><tt class="py-name">ResetBoundingBox</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line">        <tt class="py-name">dc</tt><tt class="py-op">.</tt><tt class="py-name">BeginDrawing</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line">        <tt class="py-name">height</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">canvas</tt><tt class="py-op">.</tt><tt class="py-name">figure</tt><tt class="py-op">.</tt><tt class="py-name">bbox</tt><tt class="py-op">.</tt><tt class="py-name">height</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line">        <tt class="py-name">y1</tt> <tt class="py-op">=</tt> <tt class="py-name">height</tt> <tt class="py-op">-</tt> <tt class="py-name">y1</tt> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line">        <tt class="py-name">y0</tt> <tt class="py-op">=</tt> <tt class="py-name">height</tt> <tt class="py-op">-</tt> <tt class="py-name">y0</tt> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line"> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">y1</tt><tt class="py-op">&lt;</tt><tt class="py-name">y0</tt><tt class="py-op">:</tt> <tt class="py-name">y0</tt><tt class="py-op">,</tt> <tt class="py-name">y1</tt> <tt class="py-op">=</tt> <tt class="py-name">y1</tt><tt class="py-op">,</tt> <tt class="py-name">y0</tt> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">x1</tt><tt class="py-op">&lt;</tt><tt class="py-name">y0</tt><tt class="py-op">:</tt> <tt class="py-name">x0</tt><tt class="py-op">,</tt> <tt class="py-name">x1</tt> <tt class="py-op">=</tt> <tt class="py-name">x1</tt><tt class="py-op">,</tt> <tt class="py-name">x0</tt> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line"> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">        <tt class="py-name">w</tt> <tt class="py-op">=</tt> <tt class="py-name">x1</tt> <tt class="py-op">-</tt> <tt class="py-name">x0</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line">        <tt class="py-name">h</tt> <tt class="py-op">=</tt> <tt class="py-name">y1</tt> <tt class="py-op">-</tt> <tt class="py-name">y0</tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line"> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line">        <tt class="py-name">rect</tt> <tt class="py-op">=</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">x0</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">y0</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">w</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">h</tt><tt class="py-op">)</tt> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> <tt class="py-name">lastrect</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lastrect</tt> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">AttributeError</tt><tt class="py-op">:</tt> <tt class="py-keyword">pass</tt> </tt>
+<a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> <tt class="py-name">dc</tt><tt class="py-op">.</tt><tt class="py-name">DrawRectangle</tt><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-name">lastrect</tt><tt class="py-op">)</tt>  <tt class="py-comment">#erase last</tt> </tt>
+<a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lastrect</tt> <tt class="py-op">=</tt> <tt class="py-name">rect</tt> </tt>
+<a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line">        <tt class="py-name">dc</tt><tt class="py-op">.</tt><tt class="py-name">DrawRectangle</tt><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-name">rect</tt><tt class="py-op">)</tt> </tt>
+<a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line">        <tt class="py-name">dc</tt><tt class="py-op">.</tt><tt class="py-name">EndDrawing</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line"> </tt>
+<a name="NavigationToolbar2Wx.set_status_bar"></a><div id="NavigationToolbar2Wx.set_status_bar-def"><a name="L223"></a><tt class="py-lineno">223</tt> <a class="py-toggle" href="#" id="NavigationToolbar2Wx.set_status_bar-toggle" onclick="return toggle('NavigationToolbar2Wx.set_status_bar');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="toolbar.NavigationToolbar2Wx-class.html#set_status_bar">set_status_bar</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">statbar</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NavigationToolbar2Wx.set_status_bar-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="NavigationToolbar2Wx.set_status_bar-expanded"><a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">statbar</tt> <tt class="py-op">=</tt> <tt class="py-name">statbar</tt> </tt>
+</div><a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line"> </tt>
+<a name="NavigationToolbar2Wx.set_message"></a><div id="NavigationToolbar2Wx.set_message-def"><a name="L226"></a><tt class="py-lineno">226</tt> <a class="py-toggle" href="#" id="NavigationToolbar2Wx.set_message-toggle" onclick="return toggle('NavigationToolbar2Wx.set_message');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="toolbar.NavigationToolbar2Wx-class.html#set_message">set_message</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">s</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NavigationToolbar2Wx.set_message-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="NavigationToolbar2Wx.set_message-expanded"><a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">statbar</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">statbar</tt><tt class="py-op">.</tt><tt class="py-name">set_function</tt><tt class="py-op">(</tt><tt class="py-name">s</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line"> </tt>
+<a name="NavigationToolbar2Wx.set_history_buttons"></a><div id="NavigationToolbar2Wx.set_history_buttons-def"><a name="L229"></a><tt class="py-lineno">229</tt> <a class="py-toggle" href="#" id="NavigationToolbar2Wx.set_history_buttons-toggle" onclick="return toggle('NavigationToolbar2Wx.set_history_buttons');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="toolbar.NavigationToolbar2Wx-class.html#set_history_buttons">set_history_buttons</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NavigationToolbar2Wx.set_history_buttons-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="NavigationToolbar2Wx.set_history_buttons-expanded"><a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line">        <tt class="py-name">can_backward</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_views</tt><tt class="py-op">.</tt><tt class="py-name">_pos</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line">        <tt class="py-name">can_forward</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_views</tt><tt class="py-op">.</tt><tt class="py-name">_pos</tt> <tt class="py-op">&lt;</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_views</tt><tt class="py-op">.</tt><tt class="py-name">_elements</tt><tt class="py-op">)</tt> <tt class="py-op">-</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L232"></a><tt class="py-lineno">232</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">EnableTool</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_NTB2_BACK</tt><tt class="py-op">,</tt> <tt class="py-name">can_backward</tt><tt class="py-op">)</tt> </tt>
+<a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">EnableTool</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_NTB2_FORWARD</tt><tt class="py-op">,</tt> <tt class="py-name">can_forward</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L234"></a><tt class="py-lineno">234</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >siscam</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Mar 12 18:29:27 2009
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

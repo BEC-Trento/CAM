@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>LM</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >siscam</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Module&nbsp;LM
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="LM-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module LM</h1><p class="nomargin-top"><span class="codelink"><a href="LM-pysrc.html">source&nbsp;code</a></span></p>
+<p>This module contains pure Python implementations of the 
+  Levenberg-Marquardt algorithm for data fitting.</p>
+
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="Dgauss1d"></a><span class="summary-sig-name">Dgauss1d</span>(<span class="summary-sig-arg">pars</span>,
+        <span class="summary-sig-arg">x</span>,
+        <span class="summary-sig-arg">v</span>=<span class="summary-sig-default">0</span>)</span><br />
+      calculated Jacobian matrix for 1d gauss</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LM-pysrc.html#Dgauss1d">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="LM-module.html#LM" class="summary-sig-name">LM</a>(<span class="summary-sig-arg">fun</span>,
+        <span class="summary-sig-arg">pars</span>,
+        <span class="summary-sig-arg">args</span>,
+        <span class="summary-sig-arg">tau</span>=<span class="summary-sig-default">0.01</span>,
+        <span class="summary-sig-arg">eps1</span>=<span class="summary-sig-default">1e-006</span>,
+        <span class="summary-sig-arg">eps2</span>=<span class="summary-sig-default">1e-006</span>,
+        <span class="summary-sig-arg">kmax</span>=<span class="summary-sig-default">20</span>,
+        <span class="summary-sig-arg">verbose</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">full_output</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Implementation of the Levenberg-Marquardt algorithm in pure Python.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LM-pysrc.html#LM">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="LMqr"></a><span class="summary-sig-name">LMqr</span>(<span class="summary-sig-arg">fun</span>,
+        <span class="summary-sig-arg">pars</span>,
+        <span class="summary-sig-arg">args</span>,
+        <span class="summary-sig-arg">tau</span>=<span class="summary-sig-default">0.001</span>,
+        <span class="summary-sig-arg">eps1</span>=<span class="summary-sig-default">1e-008</span>,
+        <span class="summary-sig-arg">eps2</span>=<span class="summary-sig-default">1e-008</span>,
+        <span class="summary-sig-arg">kmax</span>=<span class="summary-sig-default">100</span>,
+        <span class="summary-sig-arg">verbose</span>=<span class="summary-sig-default">False</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LM-pysrc.html#LMqr">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="fJ"></a><span class="summary-sig-name">fJ</span>(<span class="summary-sig-arg">pars</span>,
+        <span class="summary-sig-arg">x</span>,
+        <span class="summary-sig-arg">y</span>=<span class="summary-sig-default">0</span>)</span><br />
+      Calculation of function and Jacobian for one-dimensional Gaussian.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LM-pysrc.html#fJ">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="fJr"></a><span class="summary-sig-name">fJr</span>(<span class="summary-sig-arg">pars</span>,
+        <span class="summary-sig-arg">x</span>,
+        <span class="summary-sig-arg">y</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">calcJ</span>=<span class="summary-sig-default">True</span>)</span><br />
+      calculate f and J for reduced system (only nonlinear parameters)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LM-pysrc.html#fJr">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="fitparerror"></a><span class="summary-sig-name">fitparerror</span>(<span class="summary-sig-arg">fitpar</span>,
+        <span class="summary-sig-arg">J</span>,
+        <span class="summary-sig-arg">res</span>)</span><br />
+      fitpar: fit parameters J: Jacabi matrix r: residuum</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LM-pysrc.html#fitparerror">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="LM-module.html#gauss1d" class="summary-sig-name">gauss1d</a>(<span class="summary-sig-arg">pars</span>,
+        <span class="summary-sig-arg">x</span>,
+        <span class="summary-sig-arg">v0</span>=<span class="summary-sig-default">0</span>)</span><br />
+      calculate 1d gaussian.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LM-pysrc.html#gauss1d">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="rF"></a><span class="summary-sig-name">rF</span>(<span class="summary-sig-arg">pars</span>,
+        <span class="summary-sig-arg">x</span>)</span><br />
+      calculate all f_i and df_i/dp_j</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LM-pysrc.html#rF">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="testLM"></a><span class="summary-sig-name">testLM</span>()</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LM-pysrc.html#testLM">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="testLMqr"></a><span class="summary-sig-name">testLMqr</span>()</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LM-pysrc.html#testLMqr">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="testfLMs"></a><span class="summary-sig-name">testfLMs</span>()</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LM-pysrc.html#testfLMs">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Inf"></a><span class="summary-name">Inf</span> = <code title="1.#INF">1.#INF</code>
+    </td>
+  </tr>
+</table>
+<p class="indent-wrapped-lines"><b>Imports:</b>
+  <span title="numpy.lib.twodim_base.diag">diag</span>,
+  <a href="LM-module.html#dot" title="LM.dot">dot</a>,
+  <span title="numpy.lib.twodim_base.eye">eye</span>,
+  <a href="LM-module.html#inner" title="LM.inner">inner</a>,
+  <span title="numpy.core.fromnumeric.amax">max</span>,
+  <span title="numpy.linalg.linalg.norm">norm</span>,
+  <span title="numpy">numpy</span>,
+  <span title="numpy.linalg.linalg.solve">solve</span>,
+  <span title="time">time</span>
+</p><br />
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="LM"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">LM</span>(<span class="sig-arg">fun</span>,
+        <span class="sig-arg">pars</span>,
+        <span class="sig-arg">args</span>,
+        <span class="sig-arg">tau</span>=<span class="sig-default">0.01</span>,
+        <span class="sig-arg">eps1</span>=<span class="sig-default">1e-006</span>,
+        <span class="sig-arg">eps2</span>=<span class="sig-default">1e-006</span>,
+        <span class="sig-arg">kmax</span>=<span class="sig-default">20</span>,
+        <span class="sig-arg">verbose</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">full_output</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="LM-pysrc.html#LM">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Implementation of the Levenberg-Marquardt algorithm in pure Python. 
+  Solves the normal equations.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="gauss1d"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">gauss1d</span>(<span class="sig-arg">pars</span>,
+        <span class="sig-arg">x</span>,
+        <span class="sig-arg">v0</span>=<span class="sig-default">0</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="LM-pysrc.html#gauss1d">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>calculate 1d gaussian.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>pars</code></strong> - parameters of gaussian. see source.</li>
+        <li><strong class="pname"><code>x</code></strong> - x values</li>
+        <li><strong class="pname"><code>v0</code></strong> - reference value</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>difference of 1d gaussian and reference (data) values</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >siscam</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Mar 12 18:29:24 2009
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
