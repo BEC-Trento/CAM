@@ -1,18 +1,16 @@
 import os
+from sys import path
 
 #basedir = r"c:/fit/siscam"
-basedir = "/home/gabriele/Desktop/CAMERA/CAM/"
-
+#basedir = "/home/gabriele/Desktop/CAMERA/CAM/"
+basedir = path[0]
 #full path to image file
 
 #imagefile = os.path.join(basedir, 'img/test.sis')
 
-#WHEN USING IMAGING-PC ON WINDOWS
-imagefile = os.path.join('/home/gabriele/sis-fish/', 'test.sis')
 
-#WHEN USING IMAGING-PC ON UBUNTU
-#imagefile = os.path.join('sftp://bec1@10.194.32.22/home/bec1/sis-fish', 'test.sis')
-
+#imagefile = os.path.join('/home/gabriele/sis-fish/', 'test.sis')
+imagefile = os.path.join(basedir, 'test.sis')
 
 rawimage1file = imagefile
 rawimage2file = imagefile

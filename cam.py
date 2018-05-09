@@ -2518,6 +2518,11 @@ class ImgAppAui(wx.App):
         self.frame.Bind(wx.EVT_CHECKBOX,
                         self.OnAutoreloadClicked,
                         id=self.ID_Autoreload)
+        
+        # Added when changing filewatch
+        self.FileWatcher = filewatch.FileChangeNotifier(self.imagefilename.replace,
+                                                        self.imagefilename.replace(".sis", ""),
+                                                        self.ConcatenateSis)
 
         # Record data
         self.record_data_button = wx.Button(self.tb, self.ID_RecordData,
@@ -3033,6 +3038,8 @@ class ImgAppAui(wx.App):
         #img=numpy.concatenate([img0, img1])
                 
         write_raw_image(self.imagefilename, img)
+        self.CreateReloadEvent()
+        
 ##############
 
 
@@ -3054,12 +3061,16 @@ class ImgAppAui(wx.App):
         self.sync_imaging_pars_expansion_time()
         imgV, imgH = loadimg(self.imagefilename)
         ############# added 17-12-2012
-        self.ConcatenateSis()
-        self.fileconcatenatethread0 = filewatch.FileChangeNotifier(self.imagefilename.replace(".sis","_0.sis"),
-                                                    callback=self.ConcatenateSis)
-#        self.fileconcatenatethread1 = filewatch.FileChangeNotifier(self.imagefilename.replace(".sis","_1.sis"),
+#        self.ConcatenateSis()
+        self.FileWatcher = filewatch.FileChangeNotifier("",
+                                                        self.imagefilename.replace(".sis", "_0.sis"),
+                                                        self.ConcatenateSis)
+        
+#        self.fileconcatenatethread0 = filewatch.FileChangeNotifier(self.imagefilename.replace(".sis","_0.sis"),
 #                                                    callback=self.ConcatenateSis)
-        self.fileconcatenatethread0.start()
+##        self.fileconcatenatethread1 = filewatch.FileChangeNotifier(self.imagefilename.replace(".sis","_1.sis"),
+#                                                    callback=self.ConcatenateSis)
+#        self.fileconcatenatethread0.start()
         #self.fileconcatenatethread1.start()
         #############
         
@@ -3151,12 +3162,14 @@ class ImgAppAui(wx.App):
     def OnAutoreloadClicked(self, event):
         if event.IsChecked():
             #activate automatic reload
-            self.filewatchthread = filewatch.FileChangeNotifier(self.imagefilename,    ############commented on 01-02-2013
-                                                callback=self.CreateReloadEvent)
-            self.filewatchthread.start()
+            self.FileWatcher.setEnabled(True)
+#            self.filewatchthread = filewatch.FileChangeNotifier(self.imagefilename,    ############commented on 01-02-2013
+#                                                callback=self.CreateReloadEvent)
+#            self.filewatchthread.start()
         else:
-            self.filewatchthread.keeprunning = False
-            self.filewatchthread.join()
+            self.FileWatcher.setEnabled(False)
+#            self.filewatchthread.keeprunning = False
+#            self.filewatchthread.join()
             
 
     def OnRecordDataButtonClicked(self, event):
