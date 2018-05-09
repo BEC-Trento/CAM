@@ -1,6 +1,9 @@
 # CAM settings
 settings.py
 
+# sis for testing
+*.sis
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
