@@ -1082,7 +1082,13 @@ class ImgAppAui(wx.App):
     #
     
     #other settings
-    imagefilename = settings.imagefile
+    imagefilename = os.path.abspath(settings.imagefile)
+    try: # used to keep compatibility with older settings
+        watchedfiles = [os.path.abspath(f) for f in settings.watchedfiles]
+    except NameError:
+        watchedfiles = [self.imagefilename]
+    
+    # TODO: Deprecated?
     rawimg1filename = settings.rawimage1file
     rawimg2filename = settings.rawimage2file
     rawimg3filename = settings.rawimage3file
@@ -2520,8 +2526,7 @@ class ImgAppAui(wx.App):
                         id=self.ID_Autoreload)
         
         # Added when changing filewatch
-        self.FileWatcher = filewatch.FileChangeNotifier(self.imagefilename.replace,
-                                                        self.imagefilename.replace(".sis", ""),
+        self.FileWatcher = filewatch.FileChangeNotifier(self.watchedfiles,
                                                         self.ConcatenateSis)
 
         # Record data
@@ -3062,9 +3067,8 @@ class ImgAppAui(wx.App):
         imgV, imgH = loadimg(self.imagefilename)
         ############# added 17-12-2012
 #        self.ConcatenateSis()
-        self.FileWatcher = filewatch.FileChangeNotifier("",
-                                                        self.imagefilename.replace(".sis", "_0.sis"),
-                                                        self.ConcatenateSis)
+#        self.FileWatcher = filewatch.FileChangeNotifier(self.imagefilename.replace(".sis", "_0.sis"),
+#                                                        self.ConcatenateSis)
         
 #        self.fileconcatenatethread0 = filewatch.FileChangeNotifier(self.imagefilename.replace(".sis","_0.sis"),
 #                                                    callback=self.ConcatenateSis)

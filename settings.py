@@ -4,14 +4,17 @@ from sys import path
 #basedir = r"c:/fit/siscam"
 #basedir = "/home/gabriele/Desktop/CAMERA/CAM/"
 basedir = path[0]
-#full path to image file
 
+
+### Full path to image file
 #imagefile = os.path.join(basedir, 'img/test.sis')
-
-
 #imagefile = os.path.join('/home/gabriele/sis-fish/', 'test.sis')
-imagefile = os.path.join(basedir, 'test.sis')
+imagefile = os.path.join(basedir, 'test.sis') # the combined .sis that will be saved
 
+### Full path to incoming images files
+watchedfiles = ['test_0.sis', 'test_1.sis'] # files that are monitored for autoreload
+
+#are they now deprecated?
 rawimage1file = imagefile
 rawimage2file = imagefile
 rawimage3file = imagefile

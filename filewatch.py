@@ -2,10 +2,10 @@
 #-*- coding: latin-1 -*-
 """Watch if a file is changed. Used for automatic reloading."""
 
-import threading
-import os
-import time
-import sys
+#import threading
+#import os
+#import time
+#import sys
 
 #
 # def dosomething():
@@ -43,51 +43,92 @@ import sys
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 import time
-
-
-class MyHandler(FileSystemEventHandler):
-
-    def __init__(self, callback, files, enabled=False):
-        self.callback = callback
-        self.enabled = enabled
-        self.monitoredfiles = files
-        print files
-
-    def on_modified(self, event):
-        if (event.src_path in self.monitoredfiles) and self.enabled:
-            print "gotcha"
-#            self.callback()
-#        print event
-
+import os
 
 class FileChangeNotifier():
     """
-    Glue class between cam.py and watchdog
+    Glue class between cam.py and watchdog. It will launch callback function
+    only when ALL files have been update once
     usage:
-        folder: folder where to watch
-        files: files to be watched
+        files: files to be watched (must be in the same folder!)
         callback: function to call when files are modified
         delay: delay before function call
         enabled: toggles if the callback is called or not
     """
 
-    def __init__(self, folder, files, callback, delay=0.5, enabled=False):
+    def __init__(self, files, callback, delay=0.5, enabled=False):
 
         self.callback = callback
         self.delay = delay
-        self.monitoredfiles = [os.path.join(folder, f) for f in files]
+        self.monitoredfiles = files
 
         self.observer = Observer()
-        self.event_handler = MyHandler(None, self.monitoredfiles, enabled)
+        self.event_handler = FileChangeNotifier.MyHandler(
+            callback,
+            self.monitoredfiles,
+            enabled,
+            delay)
         self.setEnabled(enabled)
 
-        self.observer.schedule(self.event_handler, folder)
+        self.observer.schedule(
+            self.event_handler, os.path.dirname(self.monitoredfiles[0]))
         self.observer.start()
 
     def setEnabled(self, enabled):
+        """
+        Enabled =
+        True: callback is called
+        False: callback is never called (but observer is running)
+        """
         self.event_handler.enabled = enabled
 
+    def Stop(self):
+        """"
+        Stops the watchdog. It can't be restarted after, another one must
+        be created
+        """
+        self.observer.stop()
 
+    class MyHandler(FileSystemEventHandler):
+
+        def __init__(self, callback, files, enabled=False, delay=0.):
+            self.callback = callback
+            self.enabled = enabled
+            self.delay = delay
+            self.monitoredfiles = files
+            self.hasBeenUpdated = [False]*len(files)
+            print files
+
+        def on_modified(self, event):
+            #            print event
+            try:
+                i = self.monitoredfiles.index(event.src_path)
+                self.hasBeenUpdated[i] = True
+                if all(self.hasBeenUpdated):
+                    self.hasBeenUpdated = [False]*len(self.hasBeenUpdated)
+                    if self.enabled:
+                        time.sleep(self.delay)
+                        self.callback()
+#                        print "gotcha"
+
+            except ValueError:
+                pass
+
+
+#%% FOR TESTING
 if __name__ == '__main__':
-    d = FileChangeNotifier(os.getcwd(), ['test.sis'], lambda x: None)
+    def dosmt():
+        print "me"
+
+    d = FileChangeNotifier(os.getcwd(), ['test_0.sis', 'test_1.sis'], dosmt)
     d.setEnabled(True)
+    time.sleep(2)
+
+    with open(os.path.join(os.getcwd(), 'test_0.sis'), 'w+b') as fid:
+        fid.write(b'adhksaljdh')
+    print "1"
+
+    time.sleep(1)
+
+    with open(os.path.join(os.getcwd(), 'test_1.sis'), 'w+b') as fid:
+        fid.write(b'adhksaljdh')
