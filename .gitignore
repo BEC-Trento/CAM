@@ -3,6 +3,8 @@ settings.py
 
 # sis for testing
 *.sis
+# program settings not to be overwritten
+settings.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
