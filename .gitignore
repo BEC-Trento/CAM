@@ -5,7 +5,8 @@ settings.py
 *.sis
 # program settings not to be overwritten
 settings.py
-
+# Do not overwrite user settings
+settings.py
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
