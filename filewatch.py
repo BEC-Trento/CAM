@@ -72,6 +72,7 @@ class FileChangeNotifier():
 
         self.observer.schedule(
             self.event_handler, os.path.dirname(self.monitoredfiles[0]))
+        print "Observing the folder: "+os.path.dirname(self.monitoredfiles[0])
         self.observer.start()
 
     def setEnabled(self, enabled):
@@ -97,13 +98,14 @@ class FileChangeNotifier():
             self.delay = delay
             self.monitoredfiles = files
             self.hasBeenUpdated = [False]*len(files)
-            print files
+#            print files
 
-        def on_modified(self, event):
-            #            print event
+        def on_moved(self, event):
+#            print event
             try:
-                i = self.monitoredfiles.index(event.src_path)
+                i = self.monitoredfiles.index(event.dest_path)
                 self.hasBeenUpdated[i] = True
+#                print str(i)+" had changed"
                 if all(self.hasBeenUpdated):
                     self.hasBeenUpdated = [False]*len(self.hasBeenUpdated)
                     if self.enabled:
