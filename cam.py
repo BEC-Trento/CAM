@@ -1640,8 +1640,9 @@ class ImgAppAui(wx.App):
                 self.markersHpositions.append(self.H.markers[k].position[1])
                 # insert automatically symmetric side marker
                 # TO DO: check if out of range
-                self.markersHpositions.append(2*self.markersHpositions[0]-self.H.markers[k].position[0])
-                self.markersHpositions.append(2*self.markersHpositions[1]-self.H.markers[k].position[1])
+#REMOVED FOR COMPATIBLITY WITH GAUSSxN fit
+#                self.markersHpositions.append(2*self.markersHpositions[0]-self.H.markers[k].position[0])
+#                self.markersHpositions.append(2*self.markersHpositions[1]-self.H.markers[k].position[1])
         # side markers V
         for k, marker in enumerate(self.V.markers):
             if k > 0: 
@@ -1649,8 +1650,8 @@ class ImgAppAui(wx.App):
                 self.markersVpositions.append(self.V.markers[k].position[1])
                 # insert automatically symmetric side marker
                 # TO DO: check if out of range
-                self.markersVpositions.append(2*self.markersVpositions[0]-self.V.markers[k].position[0])
-                self.markersVpositions.append(2*self.markersVpositions[1]-self.V.markers[k].position[1])
+#                self.markersVpositions.append(2*self.markersVpositions[0]-self.V.markers[k].position[0])
+#                self.markersVpositions.append(2*self.markersVpositions[1]-self.V.markers[k].position[1])
         
                 
         print 'markers H', self.markersHpositions

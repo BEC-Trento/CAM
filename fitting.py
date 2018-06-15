@@ -1920,7 +1920,7 @@ class NGauss2d(Gauss2d):
         width = 10 # initial guess
         # guess width as distance of 1st and 2nd marker, divided by 4
         if len(self.center_pos)>2: 
-            width = 0.2*((self.center_pos[0]-self.center_pos[2])**2+(self.center_pos[1]-self.center_pos[3])**2)**.5
+            width = 0.05*((self.center_pos[0]-self.center_pos[2])**2+(self.center_pos[1]-self.center_pos[3])**2)**.5
 
         startpar = numpy.array([0]) #offset
         for k in range(len(self.center_pos)/2):
@@ -3360,8 +3360,8 @@ class FitParsGauss1d(FitPars):
     fitparnames = ['OD', 'sx', 'sy', 'mx', 'my',  
                    'T', 'N', 'sigma'
                    ]
-    fitparunits = ['', 'µm', 'µm', 'px', 'px', 
-                   'µK', 'K', ''
+    fitparunits = ['', '\B5m', '\B5m', 'px', 'px', 
+                   '\B5K', 'K', ''
                    ]
     
     def __init__(self, fitpars, imaging_pars, roi, fitparerr = numpy.zeros(8), sigma = 0.0):
@@ -3402,17 +3402,17 @@ class FitParsGauss1d(FitPars):
 
     @property
     def sx(self):
-        "width of gaussian in µm"
+        "width of gaussian in \B5m"
         return abs(self.sxpx) * self.imaging_pars.pixelsize
 
     @property
     def sy(self):
-        "width of gaussian in µm"
+        "width of gaussian in \B5m"
         return abs(self.sypx) * self.imaging_pars.pixelsize
 
     @property
     def T(self):
-        "temperature of cloud in µK"
+        "temperature of cloud in \B5K"
         if self.imaging_pars.expansion_time:
             return 0.5*((self.sx*1e-6)**2 + (self.sy*1e-6)**2) / \
                    (self.imaging_pars.expansion_time*1e-3)**2 * \
@@ -3424,9 +3424,9 @@ class FitParsGauss1d(FitPars):
         s = u"OD: %6.2f\n" \
             u"mx: %5.1f px\n" \
             u"my: %5.1f px\n" \
-            u"sx: %5.1f µm\n" \
-            u"sy: %5.1f µm\n" \
-            u"T : %5.3f µK\n" \
+            u"sx: %5.1f \B5m\n" \
+            u"sy: %5.1f \B5m\n" \
+            u"T : %5.3f \B5K\n" \
             u"N : %5.1f k\n" \
             %(self.OD, self.mx, self.my, self.sx,
               self.sy, self.T, self.N)
@@ -3441,8 +3441,8 @@ class FitParsLorentzGauss1d(FitParsGauss1d):
     fitparnames = ['OD', 'sx', 'sy', 'mx', 'my', 
                    'T', 'N', 'sigma'
                    ]
-    fitparunits = ['', 'µm', 'µm', 'px', 'px',
-                   'µK', 'K', ''
+    fitparunits = ['', '\B5m', '\B5m', 'px', 'px',
+                   '\B5K', 'K', ''
                    ]
     def __init__(self, fitpars, imaging_pars, roi, fitparerr = numpy.zeros(9), sigma = 0.0):
         FitParsGauss1d.__init__(self, fitpars, imaging_pars, roi, fitparerr, sigma)
@@ -3459,9 +3459,9 @@ class FitParsLorentzGauss1d(FitParsGauss1d):
         s = u"OD: %6.2f\n" \
             u"mx: %5.1f px\n" \
             u"my: %5.1f px\n" \
-            u"sx: %5.1f µm\n" \
-            u"sy: %5.1f µm\n" \
-            u"T : %5.3f µK\n" \
+            u"sx: %5.1f \B5m\n" \
+            u"sy: %5.1f \B5m\n" \
+            u"T : %5.3f \B5K\n" \
             u"N : %5.1f k\n" \
             %(self.OD, self.mx, self.my, self.sx, 
               self.sy, self.T, self.N)
@@ -3476,8 +3476,8 @@ class FitParsGaussGauss1d(FitParsGauss1d):
     fitparnames = ['OD', 'OD1', 'sx', 'sy', 's1x', 'mx', 'my', 'm1x', 
                    'T', 'N0', 'N1', 'N', 'sigma'
                    ]
-    fitparunits = ['', '', 'µm', 'µm', 'µm', 'px', 'px', 'px',
-                   'µK', 'K', 'K', 'K', ''
+    fitparunits = ['', '', '\B5m', '\B5m', '\B5m', 'px', 'px', 'px',
+                   '\B5K', 'K', 'K', 'K', ''
                    ]
     def __init__(self, fitpars, imaging_pars, roi, fitparerr = numpy.zeros(11), sigma = 0.0):
               FitParsGauss1d.__init__(self, fitpars, imaging_pars, roi, fitparerr, sigma)
@@ -3490,7 +3490,7 @@ class FitParsGaussGauss1d(FitParsGauss1d):
         return self.A1x
     @property
     def s1x(self):
-        "width of gaussian in µm"
+        "width of gaussian in \B5m"
         return abs(self.s1xpx) * self.imaging_pars.pixelsize
     @property
     def N0(self):
@@ -3512,7 +3512,7 @@ class FitParsGaussGauss1d(FitParsGauss1d):
         return self.N0 + self.N1  
     @property
     def T(self):
-        "temperature of cloud in µK"
+        "temperature of cloud in \B5K"
         if self.imaging_pars.expansion_time:
             return (self.sy*1e-6)**2 / \
                    (self.imaging_pars.expansion_time*1e-3)**2 * \
@@ -3526,10 +3526,10 @@ class FitParsGaussGauss1d(FitParsGauss1d):
             u"mx: %5.1f px\n" \
             u"    %5.1f px\n" \
             u"my: %5.1f px\n" \
-            u"sx: %5.1f µm\n" \
-            u"    %5.1f µm\n" \
-            u"sy: %5.1f µm\n" \
-            u"T : %5.3f µK\n" \
+            u"sx: %5.1f \B5m\n" \
+            u"    %5.1f \B5m\n" \
+            u"sy: %5.1f \B5m\n" \
+            u"T : %5.3f \B5K\n" \
             u"N : %3.1f/%3.1f k\n" \
             u"    %3.1f k\n" \
             %(self.OD, self.OD1, self.mx, self.m1x, self.my, 
@@ -3554,9 +3554,9 @@ class FitParsGauss2d(FitPars):
                    'sigma'
                    ]
     fitparunits = ['', ''
-                   'µm', 'µm', 'µm', 'µm', 
+                   '\B5m', '\B5m', '\B5m', '\B5m', 
                    'px', 'px', 'px', 'px', 
-                   'µK', 
+                   '\B5K', 
                    'K', 'K',
                    '',
                    ]
@@ -3618,27 +3618,27 @@ class FitParsGauss2d(FitPars):
 
     @property
     def sx(self):
-        "width of gaussian in µm"
+        "width of gaussian in \B5m"
         return abs(self.sxpx) * self.imaging_pars.pixelsize
 
     @property
     def sy(self):
-        "width of gaussian in µm"
+        "width of gaussian in \B5m"
         return abs(self.sypx) * self.imaging_pars.pixelsize
 
     @property
     def sxerr(self):
-        "error width of gaussian in µm"
+        "error width of gaussian in \B5m"
         return abs(self.sxpxerr) * self.imaging_pars.pixelsize
 
     @property
     def syerr(self):
-        "error width of gaussian in µm"
+        "error width of gaussian in \B5m"
         return abs(self.sypxerr) * self.imaging_pars.pixelsize
     
     @property
     def T(self):
-        "temperature of cloud in µK"
+        "temperature of cloud in \B5K"
         if self.imaging_pars.expansion_time:
             return 0.5*((self.sx*1e-6)**2 + (self.sy*1e-6)**2) / \
                    (self.imaging_pars.expansion_time*1e-3)**2 * \
@@ -3657,19 +3657,19 @@ class FitParsGauss2d(FitPars):
         
     def __str__(self):
         s = u"OD: %6.2f\n" \
-            u"     ±%3.2f\n"  \
+            u"     \B1%3.2f\n"  \
             u"mx: %5.1f px\n" \
-            u"     ±%3.2f\n" \
+            u"     \B1%3.2f\n" \
             u"my: %5.1f px\n" \
-            u"     ±%3.2f\n"  \
-            u"sx: %5.1f µm\n" \
-            u"     ±%3.2f\n" \
-            u"sy: %5.1f µm\n" \
-            u"     ±%3.2f\n" \
-            u"T : %5.3f µK\n" \
-            u"   ±%5.3f\n" \
+            u"     \B1%3.2f\n"  \
+            u"sx: %5.1f \B5m\n" \
+            u"     \B1%3.2f\n" \
+            u"sy: %5.1f \B5m\n" \
+            u"     \B1%3.2f\n" \
+            u"T : %5.3f \B5K\n" \
+            u"   \B1%5.3f\n" \
             u"N : %5.1f k\n" \
-            u"    ±%3.2f" \
+            u"    \B1%3.2f" \
             %(self.OD, self.ODerr,
               self.mx, self.mxerr,
               self.my, self.myerr,
@@ -3732,11 +3732,11 @@ class FitParsBimodal2d(FitParsGauss2d):
                    'OD',
                    'sigma']
 
-    fitparunits = ['µm', 'µm', 'µm', 'µm', 
+    fitparunits = ['\B5m', '\B5m', '\B5m', '\B5m', 
                    'px', 'px', 'px', 'px',
-                   'µm', 'µm', 'µm', 'µm', 
+                   '\B5m', '\B5m', '\B5m', '\B5m', 
                    '10^3', '10^3', '10^3',
-                   'µK',
+                   '\B5K',
                    '',
                    '',]
 
@@ -3774,30 +3774,30 @@ class FitParsBimodal2d(FitParsGauss2d):
         
     @property
     def rx(self):
-        "Thomas-Fermi radius in µm"
+        "Thomas-Fermi radius in \B5m"
         return abs(self.rxpx) * self.imaging_pars.pixelsize
 
     @property
     def ry(self):
-        "Thomas-Fermi radius in µm"
+        "Thomas-Fermi radius in \B5m"
         return abs(self.rypx) * self.imaging_pars.pixelsize
 
     @property
     def rxerr(self):
-        "error Thomas-Fermi radius in µm"
+        "error Thomas-Fermi radius in \B5m"
         return abs(self.rxpxerr) * self.imaging_pars.pixelsize
 
     @property
     def ryerr(self):
-        "error Thomas-Fermi radius in µm"
+        "error Thomas-Fermi radius in \B5m"
         return abs(self.rypxerr) * self.imaging_pars.pixelsize
 
     def __str__(self):
-        s = u"Dtb:%3.2f/%3.2f\n   ±%3.2f/%3.2f\n"  \
-            u"mxy:%3.0f/%3.0f px\n   ±%3.1f/%3.1f\n" \
-            u"sxy:%3.0f/%3.0f µm\n   ±%3.1f/%3.1f\n" \
-            u"rxy:%3.0f/%3.0f µm\n   ±%3.1f/%3.1f\n" \
-            u"Tth:%5.3f µK\n   ±%5.3f\n"\
+        s = u"Dtb:%3.2f/%3.2f\n   \B1%3.2f/%3.2f\n"  \
+            u"mxy:%3.0f/%3.0f px\n   \B1%3.1f/%3.1f\n" \
+            u"sxy:%3.0f/%3.0f \B5m\n   \B1%3.1f/%3.1f\n" \
+            u"rxy:%3.0f/%3.0f \B5m\n   \B1%3.1f/%3.1f\n" \
+            u"Tth:%5.3f \B5K\n   \B1%5.3f\n"\
             u"Nsb:%3.0f/%3.0f K" \
             %(self.A, self.B, self.Aerr, self.Berr,
               self.mx, self.my, self.mxerr, self.myerr,
@@ -3826,12 +3826,12 @@ class FitParsBimodal2dSplit(FitParsGauss2d):
                    'OD',
                    'sigma']
 
-    fitparunits = ['µm', 'µm', 'µm', 'µm', 
+    fitparunits = ['\B5m', '\B5m', '\B5m', '\B5m', 
                    'px', 'px', 'px', 'px',
                    'px', 'px', 'px', 'px',
-                   'µm', 'µm', 'µm', 'µm', 
+                   '\B5m', '\B5m', '\B5m', '\B5m', 
                    '10^3', '10^3', '10^3',
-                   'µK',
+                   '\B5K',
                    '',
                    '',]
 
@@ -3869,31 +3869,31 @@ class FitParsBimodal2dSplit(FitParsGauss2d):
         
     @property
     def rx(self):
-        "Thomas-Fermi radius in µm"
+        "Thomas-Fermi radius in \B5m"
         return abs(self.rxpx) * self.imaging_pars.pixelsize
 
     @property
     def ry(self):
-        "Thomas-Fermi radius in µm"
+        "Thomas-Fermi radius in \B5m"
         return abs(self.rypx) * self.imaging_pars.pixelsize
 
     @property
     def rxerr(self):
-        "error Thomas-Fermi radius in µm"
+        "error Thomas-Fermi radius in \B5m"
         return abs(self.rxpxerr) * self.imaging_pars.pixelsize
 
     @property
     def ryerr(self):
-        "error Thomas-Fermi radius in µm"
+        "error Thomas-Fermi radius in \B5m"
         return abs(self.rypxerr) * self.imaging_pars.pixelsize
 
     def __str__(self):
-        s = u"Dtb:%3.2f/%3.2f\n   ±%3.2f/%3.2f\n"  \
-            u"mxy:%3.0f/%3.0f px\n   ±%3.1f/%3.1f\n" \
-            u"m1xy:%3.0f/%3.0f px\n   ±%3.1f/%3.1f\n" \
-            u"sxy:%3.0f/%3.0f µm\n   ±%3.1f/%3.1f\n" \
-            u"rxy:%3.0f/%3.0f µm\n   ±%3.1f/%3.1f\n" \
-            u"Tth:%5.3f µK\n   ±%5.3f\n"\
+        s = u"Dtb:%3.2f/%3.2f\n   \B1%3.2f/%3.2f\n"  \
+            u"mxy:%3.0f/%3.0f px\n   \B1%3.1f/%3.1f\n" \
+            u"m1xy:%3.0f/%3.0f px\n   \B1%3.1f/%3.1f\n" \
+            u"sxy:%3.0f/%3.0f \B5m\n   \B1%3.1f/%3.1f\n" \
+            u"rxy:%3.0f/%3.0f \B5m\n   \B1%3.1f/%3.1f\n" \
+            u"Tth:%5.3f \B5K\n   \B1%5.3f\n"\
             u"Nsb:%3.0f/%3.0f K" \
             %(self.A, self.B, self.Aerr, self.Berr,
               self.mx, self.my, self.mxerr, self.myerr,
@@ -3921,12 +3921,12 @@ class FitParsBimodalGaussGauss2d(FitParsGauss2d):
                    'T', 'T1',
                    'OD']
 
-    fitparunits = ['µm', 'µm', 'µm', 'µm', 
+    fitparunits = ['\B5m', '\B5m', '\B5m', '\B5m', 
                    'px', 'px', 'px', 'px',
-                   'µm', 'µm', 'µm', 'µm',
+                   '\B5m', '\B5m', '\B5m', '\B5m',
                    'px', 'px', 'px', 'px', 
                    '10^3', '10^3', '10^3',
-                   'µK', 'µK',
+                   '\B5K', '\B5K',
                    '']
 
     def __init__(self, fitpars, imaging_pars, fitparerr = numpy.zeros(11)):
@@ -3982,7 +3982,7 @@ class FitParsBimodalGaussGauss2d(FitParsGauss2d):
 
     @property
     def T1(self):
-        "temperature of cloud in µK as extracted from 2nd gaussian"
+        "temperature of cloud in \B5K as extracted from 2nd gaussian"
         if self.imaging_pars.expansion_time:
             return 0.5*((self.s1x*1e-6)**2 + (self.s1y*1e-6)**2) / \
                    (self.imaging_pars.expansion_time*1e-3)**2 * \
@@ -4002,10 +4002,10 @@ class FitParsBimodalGaussGauss2d(FitParsGauss2d):
     def __str__(self):
         s = u"Dtb:%3.1f/%3.1f\n"  \
             u"mxy:%3.0f/%3.0f px\n" \
-            u"sxy:%3.0f/%3.0f µm\n" \
+            u"sxy:%3.0f/%3.0f \B5m\n" \
             u"m1xy:%3.0f/%3.0f px\n" \
-            u"s1xy:%3.0f/%3.0f µm\n" \
-            u"T/T1:%5.3f µK\n %5.3f µK\n"\
+            u"s1xy:%3.0f/%3.0f \B5m\n" \
+            u"T/T1:%5.3f \B5K\n %5.3f \B5K\n"\
             u"N:%3.1f K\n" \
             u"N0/N1:%3.1f/%3.1f K\n" \
             %(self.A, self.A1, 
@@ -4045,15 +4045,15 @@ class FitParsNGauss2d(FitParsGauss2d):
                    'T', 'T1',
                    'OD']
 
-    fitparunits = ['µm', 'µm', 'µm', 'µm', 
-                   'µm', 'µm', 'µm', 'µm', 
-                   'µm', 'µm', 
+    fitparunits = ['\B5m', '\B5m', '\B5m', '\B5m', 
+                   '\B5m', '\B5m', '\B5m', '\B5m', 
+                   '\B5m', '\B5m', 
                    'px', 'px', 'px', 'px',
                    'px', 'px', 'px', 'px',
                    'px', 'px',
                    '10^3', '10^3', '10^3',
                    '10^3', '10^3', '10^3',
-                   'µK', 'µK',
+                   '\B5K', '\B5K',
                    '']
 
     def __init__(self, fitpars, imaging_pars, fitparerr = numpy.zeros(11)):
@@ -4131,87 +4131,87 @@ class FitParsNGauss2d(FitParsGauss2d):
         
     @property
     def s1x(self):
-        "size of cloud 1 in µm"
+        "size of cloud 1 in \B5m"
         return abs(self.s1xpx) * self.imaging_pars.pixelsize
 
     @property
     def s1y(self):
-        "size of cloud 1 in µm"
+        "size of cloud 1 in \B5m"
         return abs(self.s1ypx) * self.imaging_pars.pixelsize
 
     @property
     def s1xerr(self):
-        "size of cloud 1 in µm"
+        "size of cloud 1 in \B5m"
         return abs(self.s1xpxerr) * self.imaging_pars.pixelsize
 
     @property
     def s1yerr(self):
-        "size of cloud 1 in µm"
+        "size of cloud 1 in \B5m"
         return abs(self.s1ypxerr) * self.imaging_pars.pixelsize
 
     @property
     def s2x(self):
-        "size of cloud 2 in µm"
+        "size of cloud 2 in \B5m"
         return abs(self.s2xpx) * self.imaging_pars.pixelsize
 
     @property
     def s2y(self):
-        "size of cloud 2 in µm"
+        "size of cloud 2 in \B5m"
         return abs(self.s2ypx) * self.imaging_pars.pixelsize
 
     @property
     def s2xerr(self):
-        "size of cloud 2 in µm"
+        "size of cloud 2 in \B5m"
         return abs(self.s2xpxerr) * self.imaging_pars.pixelsize
 
     @property
     def s2yerr(self):
-        "size of cloud 2 in µm"
+        "size of cloud 2 in \B5m"
         return abs(self.s2ypxerr) * self.imaging_pars.pixelsize
 
     @property
     def s3x(self):
-        "size of cloud 3 in µm"
+        "size of cloud 3 in \B5m"
         return abs(self.s3xpx) * self.imaging_pars.pixelsize
 
     @property
     def s3y(self):
-        "size of cloud 3 in µm"
+        "size of cloud 3 in \B5m"
         return abs(self.s3ypx) * self.imaging_pars.pixelsize
 
     @property
     def s3xerr(self):
-        "size of cloud 3 in µm"
+        "size of cloud 3 in \B5m"
         return abs(self.s3xpxerr) * self.imaging_pars.pixelsize
 
     @property
     def s3yerr(self):
-        "size of cloud 3 in µm"
+        "size of cloud 3 in \B5m"
         return abs(self.s3ypxerr) * self.imaging_pars.pixelsize
 
     @property
     def s4x(self):
-        "size of cloud 4 in µm"
+        "size of cloud 4 in \B5m"
         return abs(self.s4xpx) * self.imaging_pars.pixelsize
 
     @property
     def s4y(self):
-        "size of cloud 4 in µm"
+        "size of cloud 4 in \B5m"
         return abs(self.s4ypx) * self.imaging_pars.pixelsize
 
     @property
     def s4xerr(self):
-        "size of cloud 2 in µm"
+        "size of cloud 2 in \B5m"
         return abs(self.s4xpxerr) * self.imaging_pars.pixelsize
 
     @property
     def s4yerr(self):
-        "size of cloud 2 in µm"
+        "size of cloud 2 in \B5m"
         return abs(self.s4ypxerr) * self.imaging_pars.pixelsize
 
     @property
     def T1(self):
-        "temperature of cloud in µK as extracted from 2nd gaussian"
+        "temperature of cloud in \B5K as extracted from 2nd gaussian"
         if self.imaging_pars.expansion_time:
             return 0.5*((self.s1x*1e-6)**2 + (self.s1y*1e-6)**2) / \
                    (self.imaging_pars.expansion_time*1e-3)**2 * \
@@ -4276,7 +4276,7 @@ class FitParsTF2d(FitPars):
 
     fitparunits = ['10^3','10^3',
                    'px', 'px', 'px', 'px',
-                   'µm', 'µm', 'µm', 'µm',
+                   '\B5m', '\B5m', '\B5m', '\B5m',
                    '10^3',
                    '', '',
                    '',]
@@ -4317,30 +4317,30 @@ class FitParsTF2d(FitPars):
         
     @property
     def rx(self):
-        "Thomas-Fermi radius in µm"
+        "Thomas-Fermi radius in \B5m"
         return abs(self.rxpx) * self.imaging_pars.pixelsize
 
     @property
     def ry(self):
-        "Thomas-Fermi radius in µm"
+        "Thomas-Fermi radius in \B5m"
         return abs(self.rypx) * self.imaging_pars.pixelsize
 
     @property
     def rxerr(self):
-        "error Thomas-Fermi radius in µm"
+        "error Thomas-Fermi radius in \B5m"
         return abs(self.rxpxerr) * self.imaging_pars.pixelsize
 
     @property
     def ryerr(self):
-        "error Thomas-Fermi radius in µm"
+        "error Thomas-Fermi radius in \B5m"
         return abs(self.rypxerr) * self.imaging_pars.pixelsize
 
     def __str__(self):
-        s = u"OD:%3.2f ±%3.2f\n"  \
-            u"mx:%5.1f px ±%3.2f\n" \
-            u"my:%5.1f px ±%3.2f\n" \
-            u"rx:%5.1f µm ±%3.2f\n" \
-            u"ry:%5.1f µm ±%3.2f\n" \
+        s = u"OD:%3.2f \B1%3.2f\n"  \
+            u"mx:%5.1f px \B1%3.2f\n" \
+            u"my:%5.1f px \B1%3.2f\n" \
+            u"rx:%5.1f \B5m \B1%3.2f\n" \
+            u"ry:%5.1f \B5m \B1%3.2f\n" \
             u"Ntf:%3.0f K" \
             %(self.B, self.Berr,
               self.mx, self.mxerr,
@@ -4367,7 +4367,7 @@ class FitParsSV(FitParsTF2d):
 
     fitparunits = ['10^3','10^3',
                    'px', 'px', 'px', 'px',
-                   'µm', 'µm', 'µm', 'µm',
+                   '\B5m', '\B5m', '\B5m', '\B5m',
                    '10^3',
                    '', '',
                    '',]
@@ -4408,30 +4408,30 @@ class FitParsSV(FitParsTF2d):
         
     @property
     def rx(self):
-        "Thomas-Fermi radius in µm"
+        "Thomas-Fermi radius in \B5m"
         return abs(self.rxpx) * self.imaging_pars.pixelsize
 
     @property
     def ry(self):
-        "Thomas-Fermi radius in µm"
+        "Thomas-Fermi radius in \B5m"
         return abs(self.rypx) * self.imaging_pars.pixelsize
 
     @property
     def rxerr(self):
-        "error Thomas-Fermi radius in µm"
+        "error Thomas-Fermi radius in \B5m"
         return abs(self.rxpxerr) * self.imaging_pars.pixelsize
 
     @property
     def ryerr(self):
-        "error Thomas-Fermi radius in µm"
+        "error Thomas-Fermi radius in \B5m"
         return abs(self.rypxerr) * self.imaging_pars.pixelsize
 
     def __str__(self):
-        s = u"OD:%3.2f ±%3.2f\n"  \
-            u"mx:%5.1f px ±%3.2f\n" \
-            u"my:%5.1f px ±%3.2f\n" \
-            u"rx:%5.1f µm ±%3.2f\n" \
-            u"ry:%5.1f µm ±%3.2f\n" \
+        s = u"OD:%3.2f \B1%3.2f\n"  \
+            u"mx:%5.1f px \B1%3.2f\n" \
+            u"my:%5.1f px \B1%3.2f\n" \
+            u"rx:%5.1f \B5m \B1%3.2f\n" \
+            u"ry:%5.1f \B5m \B1%3.2f\n" \
             u"Ntf:%3.0f K" \
             %(self.B, self.Berr,
               self.mx, self.mxerr,
