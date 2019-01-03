@@ -25,7 +25,7 @@ class ImagingPars(object):
 
 class ImagingParsCMOS(ImagingPars):
     description = "cmos"
-    pixelsize = 6.50/2.2 #0.972  #pixelsize in µm / imaging magnification
+    pixelsize = 6.50/2.0 #0.972  #pixelsize in µm / imaging magnification
     palette = "gist_stern"
         
 class ImagingParsVertical(ImagingPars):
@@ -34,6 +34,16 @@ class ImagingParsVertical(ImagingPars):
     palette = "gist_stern"
 
 class ImagingParsHorizontal(ImagingPars):
+    description = "horizontal"
+    pixelsize = 4.40*1.0 #1.002  #pixelsize in µm / imaging magnification
+    palette = "gist_stern"
+
+class ImagingParsHorizontalDemag3(ImagingPars):
+    description = "horizontal demagnified 3"
+    pixelsize = 4.40*3 #1.002  #pixelsize in µm / imaging magnification
+    palette = "gist_stern"
+
+class ImagingParsHorizontalOld(ImagingPars):
     description = "horizontal"
     pixelsize = 4.40*2.6 #1.002  #pixelsize in µm / imaging magnification
     palette = "gist_stern"

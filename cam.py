@@ -1102,8 +1102,11 @@ class ImgAppAui(wx.App):
 
 
     imaging_parlist = [{'V': imagingpars.ImagingParsVertical(), 'H': imagingpars.ImagingParsHorizontal()},
+		       {'V': imagingpars.ImagingParsHorizontal(), 'H': imagingpars.ImagingParsHorizontal()},
                        {'V': imagingpars.ImagingParsPixelSize(), 'H': imagingpars.ImagingParsPixelSize()},
-                       {'V': imagingpars.ImagingParsDark(), 'H': imagingpars.ImagingParsDark()},
+                       {'V': imagingpars.ImagingParsDark(), 'H': imagingpars.ImagingParsDark()},{'V': imagingpars.ImagingParsCMOS(), 'H': imagingpars.ImagingParsHorizontal()},
+		       {'V': imagingpars.ImagingParsVertical(), 'H': imagingpars.ImagingParsHorizontalDemag3()},
+    		       {'V': imagingpars.ImagingParsHorizontalDemag3(), 'H': imagingpars.ImagingParsHorizontalDemag3()},
                         ]
 
 
@@ -3033,16 +3036,22 @@ class ImgAppAui(wx.App):
     def ConcatenateSis(self):
         #self.imagefilename
         
-        img0 = read(self.imagefilename.replace(".sis","_0.sis"))
-        img1 = read(self.imagefilename.replace(".sis","_1.sis"))
-        h, w = img0.shape
+        img0 = read(self.watchedfiles[0])
+	img0 = img0[img0.shape[0]/2:]
+	h0, w0 = img0.shape
+        
+	img1 = read(self.watchedfiles[1])
+	img1 = img1[img1.shape[0]/2:]        
+	h1, w1 = img1.shape
+	
+	newshape = max(h0, h1), max(w0, w1)       
+	im_0 = numpy.zeros(newshape, dtype=img0.dtype)
+	im_0[:h0, :w0] = img0
+	im_1 = numpy.zeros(newshape, dtype=img1.dtype)
+	im_1[:h1, :w1] = img1
 
-        img=numpy.concatenate((img0[h/2:], img1[h/2:]))
-
-        img.shape=img0.shape
-
-        #img=numpy.concatenate([img0, img1])
-                
+	img = numpy.concatenate((im_0, im_1))
+	                
         write_raw_image(self.imagefilename, img)
         self.CreateReloadEvent()
         
